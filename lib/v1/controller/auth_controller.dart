@@ -23,7 +23,7 @@ class AuthController extends GetxController {
 
   ///create accouny for partner account
   createPartnerAccount(context, {required AuthenticationModel authModel}) {
-       fluent.showDialog(
+    fluent.showDialog(
         context: context,
         dismissWithEsc: false,
         builder: (context) {
@@ -57,6 +57,8 @@ class AuthController extends GetxController {
           response['payload']['status'] < 300) {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
+        GetStorage().write('partnerData', response['payload']['data']);
+
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Dashboard()));
       } else {
@@ -100,13 +102,13 @@ class AuthController extends GetxController {
             service: Services.authentication,
             body: authModel.toJson())
         .then((response) {
-      print(authModel.toJson());
       print(response);
 
       if (response['payload']['status'] >= 200 &&
           response['payload']['status'] < 300) {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
+        GetStorage().write('partnerData', response['payload']['data']);
 
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Dashboard()));

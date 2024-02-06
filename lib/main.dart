@@ -19,18 +19,18 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() async {
-  
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
   await WindowManager.instance.setTitle("My Water");
 
+  await WindowManager.instance.setFullScreen(true);
+
   await GetStorage.init();
   runApp(
-    Phoenix(child: MyApp()),
+    Phoenix(child: const MyApp()),
   );
-
 }
 
 class MyApp extends StatelessWidget {
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
                   glowFactor: fluent.is10footScreen(context) ? 2.0 : 0.0,
                 ),
               ),
-              locale: Locale('en', 'US'),
+              locale: const Locale('en', 'US'),
               onGenerateRoute: (settings) {
                 switch (settings.name) {
                   case '/auth':

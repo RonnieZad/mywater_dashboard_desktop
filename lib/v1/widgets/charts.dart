@@ -1,97 +1,177 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:get/get.dart';
+import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
+import 'package:mywater_dashboard_revamp/v1/controller/campaign_controller.dart';
+import 'package:mywater_dashboard_revamp/v1/utils/typography.dart';
 
-class _LineChart extends StatelessWidget {
-  const _LineChart({required this.isShowingMainData});
+class _LineChart extends StatefulWidget {
+  _LineChart({required this.isShowingMainData});
 
   final bool isShowingMainData;
 
   @override
-  Widget build(BuildContext context) {
-    return LineChart(
-      // isShowingMainData ? sampleData1 : sampleData2,
-      sampleData2,
-      // swapAnimationDuration: const Duration(milliseconds: 250),
-    );
+  State<_LineChart> createState() => _LineChartState();
+}
+
+class _LineChartState extends State<_LineChart> {
+  CampaignController campaignController = Get.find();
+  List<String> frequencies = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
+
+  String frequenctValue = 'Daily';
+  List<FlSpot> spots = [];
+  var totalImpressions = 0;
+
+  double getTimeValue(String time) {
+    switch (time) {
+      case "0-4 hours":
+        return 0;
+      case "4-8 hours":
+        return 1;
+      case "8-12 hours":
+        return 2;
+      case "12-24 hours":
+        return 3;
+      default:
+        return 0;
+    }
   }
 
-  LineChartData get sampleData1 => LineChartData(
-        lineTouchData: lineTouchData1,
-        gridData: gridData,
-        titlesData: titlesData1,
-        borderData: borderData,
-        lineBarsData: lineBarsData1,
-        minX: 0,
-        maxX: 14,
-        maxY: 4,
-        minY: 0,
+  List<String> getBottomTitles = [
+    '0-4 hrs',
+    '4-8 hrs',
+    '8-12 hrs',
+    '12-24 hrs'
+  ]; // Adjust according to the number of intervals
+
+  selectedDurationInterval(frequencyValue) {
+    totalImpressions = 0;
+    spots.clear();
+
+    switch (frequencyValue) {
+      case 'Daily':
+        for (var metric in campaignController.getCampaignMetricsData) {
+          Map<String, dynamic> dailyMetrics = metric.dailyMetrics.toJson();
+          List values = dailyMetrics.values.toList();
+
+          totalImpressions += values.fold(
+              0,
+              (previousValue, element) =>
+                  previousValue + int.parse(element.toString()));
+
+          spots.addAll(values.asMap().entries.map((entry) {
+            return FlSpot(entry.key.toDouble(), entry.value.toDouble());
+          }));
+        }
+        break;
+      // Add cases for other frequencies if needed
+      default:
+    }
+
+    setState(() {});
+  }
+
+  List<LineChartBarData>? lineData;
+  List<List<FlSpot>> spotsList = [];
+
+  @override
+  Widget build(BuildContext context) {
+    spotsList.clear();
+    totalImpressions = 0;
+
+    for (var metric in campaignController.getCampaignMetricsData) {
+      List values = metric.dailyMetrics.toJson().values.toList();
+      totalImpressions += values.fold(
+          0,
+          (previousValue, element) =>
+              previousValue + int.parse(element.toString()));
+      spotsList.add(values.asMap().entries.map((entry) {
+        return FlSpot(entry.key.toDouble(), entry.value.toDouble());
+      }).toList());
+    }
+
+    lineData = spotsList.asMap().entries.map((entry) {
+      int index = entry.key;
+      List<FlSpot> spots = entry.value;
+
+      return LineChartBarData(
+        isCurved: false,
+        curveSmoothness: 0,
+        color: campaignPlotColors[index],
+        barWidth: 4,
+        isStrokeCapRound: false,
+        dotData: FlDotData(show: false),
+        belowBarData: BarAreaData(show: false),
+        spots: spots,
       );
+    }).toList();
 
-  LineChartData get sampleData2 => LineChartData(
-        lineTouchData: lineTouchData2,
-        gridData: gridData,
-        titlesData: titlesData2,
-        borderData: borderData,
-        lineBarsData: lineBarsData2,
-        minX: 0,
-        maxX: 14,
-        maxY: 6,
-        minY: 0,
-      );
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        LineChart(
+          LineChartData(
+            gridData: gridData,
+            titlesData: FlTitlesData(
+              bottomTitles: AxisTitles(
+                axisNameWidget: label(text: 'Time frame'),
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  interval: 1,
+                  getTitlesWidget: ((value, meta) {
+                    return label(text: getBottomTitles[value.toInt()]);
+                  }),
+                ),
+              ),
+              rightTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              topTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              leftTitles: AxisTitles(
+                sideTitles: leftTitles(),
+              ),
+            ),
+            borderData: borderData,
+            lineBarsData: lineData,
+            minX: 0,
+            maxX: 3,
+            maxY: totalImpressions.toDouble(),
+            minY: 0,
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                heading(text: 'Total Impressions'),
+              ],
+            ),
+            fluent.ComboBox<String>(
+                value: frequenctValue,
+                items: frequencies.map((e) {
+                  return fluent.ComboBoxItem(
+                    value: e,
+                    child: label(text: e),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    frequenctValue = value!;
+                  });
 
-  LineTouchData get lineTouchData1 => LineTouchData(
-        handleBuiltInTouches: true,
-        touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
+                  selectedDurationInterval(frequenctValue);
+                }),
+          ],
         ),
-      );
-
-  FlTitlesData get titlesData1 => FlTitlesData(
-        bottomTitles: AxisTitles(
-          sideTitles: bottomTitles,
-        ),
-        rightTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: leftTitles(),
-        ),
-      );
-
-  List<LineChartBarData> get lineBarsData1 => [
-        lineChartBarData1_1,
-        lineChartBarData1_2,
-        lineChartBarData1_3,
-      ];
-
-  LineTouchData get lineTouchData2 => LineTouchData(
-        enabled: false,
-      );
-
-  FlTitlesData get titlesData2 => FlTitlesData(
-        bottomTitles: AxisTitles(
-          sideTitles: bottomTitles,
-        ),
-        rightTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: leftTitles(),
-        ),
-      );
-
-  List<LineChartBarData> get lineBarsData2 => [
-        lineChartBarData2_1,
-        lineChartBarData2_2,
-        lineChartBarData2_3,
-      ];
+      ],
+    );
+  }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
@@ -131,39 +211,6 @@ class _LineChart extends StatelessWidget {
         reservedSize: 40,
       );
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontFamily: 'Poppins',
-      color: Color.fromARGB(255, 194, 193, 227),
-      fontWeight: FontWeight.w500,
-      fontSize: 12,
-    );
-    Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('JUN', style: style);
-        break;
-      case 7:
-        text = const Text('JUL', style: style);
-        break;
-      case 12:
-        text = const Text('AUG', style: style);
-        break;
-      default:
-        text = const Text('');
-        break;
-    }
-
-    return text;
-  }
-
-  SideTitles get bottomTitles => SideTitles(
-        showTitles: true,
-        reservedSize: 32,
-        interval: 1,
-        getTitlesWidget: bottomTitleWidgets,
-      );
-
   FlGridData get gridData => FlGridData(show: false);
 
   FlBorderData get borderData => FlBorderData(
@@ -174,116 +221,6 @@ class _LineChart extends StatelessWidget {
           right: BorderSide(color: Colors.transparent),
           top: BorderSide(color: Colors.transparent),
         ),
-      );
-
-  LineChartBarData get lineChartBarData1_1 => LineChartBarData(
-        isCurved: true,
-        color: Color.fromARGB(255, 102, 156, 231),
-        barWidth: 8,
-        isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 1.5),
-          FlSpot(5, 1.4),
-          FlSpot(7, 3.4),
-          FlSpot(10, 2),
-          FlSpot(12, 2.2),
-          FlSpot(13, 1.8),
-        ],
-      );
-
-  LineChartBarData get lineChartBarData1_2 => LineChartBarData(
-        isCurved: true,
-        color: Color.fromARGB(255, 198, 189, 207),
-        barWidth: 8,
-        isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(
-          show: false,
-          color: const Color(0x00aa4cfc),
-        ),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
-          FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
-        ],
-      );
-
-  LineChartBarData get lineChartBarData1_3 => LineChartBarData(
-        isCurved: true,
-        color: Color.fromARGB(255, 230, 170, 67),
-        barWidth: 8,
-        isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 2.8),
-          FlSpot(3, 1.9),
-          FlSpot(6, 3),
-          FlSpot(10, 1.3),
-          FlSpot(13, 2.5),
-        ],
-      );
-
-  LineChartBarData get lineChartBarData2_1 => LineChartBarData(
-        isCurved: false,
-        curveSmoothness: 0,
-        color: Color.fromARGB(255, 74, 246, 154),
-        barWidth: 4,
-        isStrokeCapRound: false,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 4),
-          FlSpot(5, 1.8),
-          FlSpot(7, 5),
-          FlSpot(10, 2),
-          FlSpot(12, 2.2),
-          FlSpot(13, 1.8),
-        ],
-      );
-
-  LineChartBarData get lineChartBarData2_2 => LineChartBarData(
-        isCurved: false,
-        color: Color.fromARGB(255, 170, 76, 252),
-        barWidth: 4,
-        isStrokeCapRound: false,
-        dotData: FlDotData(show: false),
-        // belowBarData: BarAreaData(
-        //   show: true,
-        //   color: const Color(0x33aa4cfc),
-        // ),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
-          FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
-        ],
-      );
-
-  LineChartBarData get lineChartBarData2_3 => LineChartBarData(
-        // isCurved: false,
-        curveSmoothness: 10,
-        color: Color.fromARGB(237, 39, 181, 252),
-        barWidth: 4,
-        isStrokeCapRound: false,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 3.8),
-          FlSpot(3, 1.9),
-          FlSpot(6, 5),
-          FlSpot(10, 3.3),
-          FlSpot(13, 4.5),
-        ],
       );
 }
 

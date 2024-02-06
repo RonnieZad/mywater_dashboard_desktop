@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/cupertino.dart';
@@ -11,10 +12,12 @@ import 'package:get/get.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
 import 'package:mywater_dashboard_revamp/v1/controller/auth_controller.dart';
 import 'package:mywater_dashboard_revamp/v1/models/authentication_model.dart';
+import 'package:mywater_dashboard_revamp/v1/screens/company_profile.dart';
 import 'package:mywater_dashboard_revamp/v1/screens/dashboard.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/file_picker.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:octo_image/octo_image.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -111,16 +114,16 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: ListView(
                             padding: EdgeInsets.only(right: 15.w),
                             children: [
-                              
                               if (authController
                                   .artworkFile.value!.files.isNotEmpty) ...[
-                             CircleAvatar(
-                              radius: 60.r,
-                              child: Image.file(
-                                File(authController.artworkFile.value!.files.first.path!),
-                                fit: BoxFit.cover,
-                              ),
-                             ),
+                                CircleAvatar(
+                                  radius: 60.r,
+                                  child: Image.file(
+                                    File(authController
+                                        .artworkFile.value!.files.first.path!),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                                 20.ph,
                               ],
                               SizedBox(
@@ -319,9 +322,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                 String? uploadedImageUrl;
 
                                 if (!oldUser) {
-                                  if (authController.artworkFile.value!.files.isNotEmpty) {
-                                    for (PlatformFile file
-                                        in authController.artworkFile.value!.files) {
+                                  if (authController
+                                      .artworkFile.value!.files.isNotEmpty) {
+                                    for (PlatformFile file in authController
+                                        .artworkFile.value!.files) {
                                       if (!kIsWeb) {
                                         File pickedFile = File(file.path!);
 
@@ -481,12 +485,21 @@ class _AuthScreenState extends State<AuthScreen> {
                   right: -100,
                   left: 100.0,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(2.r),
-                      child: Image.network(
+                    borderRadius: BorderRadius.circular(2.r),
+                    child: SizedBox(
+                      width: 900.w,
+                      height: 600.h,
+                      child: OctoImage(
+                        placeholderBuilder: OctoBlurHashFix.placeHolder(
+                            'LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
+                        errorBuilder: OctoError.icon(color: Colors.red),
+                        image: const CachedNetworkImageProvider(
                           'https://ik.imagekit.io/ecjzuksxj/man-holding-mywater-bottle.JPG?updatedAt=1703765623937',
-                          width: 900.w,
-                          height: 600.h,
-                          fit: BoxFit.cover)),
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
                 Positioned(
                   top: 100.h,

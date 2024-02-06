@@ -74,7 +74,7 @@ Widget subHeading(
         {String text = '',
         Color color = Colors.black,
         int delay = 0,
-        double fontSize = 16,
+        double fontSize = 15.4,
         int? maxlines}) =>
     Text(text,
             maxLines: maxlines,

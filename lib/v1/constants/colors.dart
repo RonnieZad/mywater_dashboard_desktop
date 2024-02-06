@@ -22,3 +22,13 @@ const Color secondaryColorWhite = Colors.white24;
 const Color secondaryColorWhite1 = Colors.white30;
 const Color secondaryColorWhite2 = Colors.white10;
 const Color secondaryColorWhite3 = Colors.white38;
+
+final List<Color> campaignPlotColors = [
+  Colors.blue,
+  Colors.red,
+  Colors.green,
+  Colors.purple,
+  Colors.orange,
+  Colors.yellow,
+  Colors.pink,
+];

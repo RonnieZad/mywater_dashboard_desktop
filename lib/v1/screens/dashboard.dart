@@ -1,20 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
 
-import 'package:intl/intl.dart';
-
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
-import 'package:mywater_dashboard_revamp/v1/controller/campaign_controller.dart';
+
 import 'package:mywater_dashboard_revamp/v1/screens/app_dashboard.dart';
+import 'package:mywater_dashboard_revamp/v1/screens/company_profile.dart';
+import 'package:mywater_dashboard_revamp/v1/screens/settings.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Dashboard extends StatefulWidget {
@@ -24,21 +25,10 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  final PageController _menuPageController = PageController();
-  
-
-  // PropertyController propertyController = Get.put(PropertyController());
-  // RoommateApplcationController roommateApplcationController =
-  //     Get.put(RoommateApplcationController());
-  // LandlordInviteController landlordInviteController =
-  //     Get.put(LandlordInviteController());
-  // RentFinanceApplicationController rentFinanceApplicationController =
-  //     Get.put(RentFinanceApplicationController());
-  // UserController userController = Get.put(UserController());
-  // PaymentController paymentController = Get.put(PaymentController());
+class _DashboardState extends State<Dashboard> {
+  final pageStorageBucket = PageStorageBucket();
+  int topIndex = 0;
+  bool isPaneOpen = false;
 
   List<fluent.NavigationPaneItem> items = [
     fluent.PaneItemSeparator(),
@@ -52,21 +42,20 @@ class _DashboardState extends State<Dashboard>
           fontWeight: FontWeight.w300,
         ),
       ),
-      body: DashboardOverview(),
+      body: const DashboardOverview(),
     ),
-
-    fluent.PaneItem(
-      icon: const Icon(fluent.FluentIcons.presentation, size: 18),
-      title: Text(
-        'Campaigns',
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w300,
-        ),
-      ),
-      body: SizedBox.shrink(),
-    ),
+    // fluent.PaneItem(
+    //   icon: const Icon(fluent.FluentIcons.presentation, size: 18),
+    //   title: Text(
+    //     'Campaigns',
+    //     style: TextStyle(
+    //       fontFamily: 'Poppins',
+    //       fontSize: 12.sp,
+    //       fontWeight: FontWeight.w300,
+    //     ),
+    //   ),
+    //   body: SizedBox.shrink(),
+    // ),
     fluent.PaneItem(
       icon: const Icon(fluent.FluentIcons.chart, size: 18),
       title: Text(
@@ -77,86 +66,34 @@ class _DashboardState extends State<Dashboard>
           fontWeight: FontWeight.w300,
         ),
       ),
-      body: SizedBox.shrink(),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(fluent.FluentIcons.blocked2, size: 50.w, color: baseColor),
+            20.ph,
+            paragraph(
+                text: 'Your reports and analytics will appear here',
+                color: Colors.black54)
+          ],
+        ),
+      ),
     ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.people_alert, size: 18),
-    //   title: Text(
-    //     'Roommate Host',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: RoommateApplication(),
-    // ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.people, size: 18),
-    //   title: Text(
-    //     'Landlord Invites',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: LanlordInvites(),
-    // ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.trigger_user, size: 18),
-    //   title: Text(
-    //     'Maintenance',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: MaintenanceApplication(),
-    // ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.money, size: 18),
-    //   title: Text(
-    //     'Rent Financing',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: RentFinanceApplication(),
-    // ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.group, size: 18),
-    //   title: Text(
-    //     'Users',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: Users(),
-    // ),
-    // fluent.PaneItem(
-    //   icon: const Icon(fluent.FluentIcons.financial, size: 18),
-    //   title: Text(
-    //     'Transactions',
-    //     style: TextStyle(
-    //       fontFamily: 'Poppins',
-    //       fontSize: 12.sp,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    //   body: Transactions(),
-    // ),
-
-    // fluent.PaneItemSeparator(),
+    fluent.PaneItem(
+      icon: const Icon(fluent.FluentIcons.info, size: 18),
+      title: Text(
+        'Profile',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w300,
+        ),
+      ),
+      body: const CompanyProfile(),
+    ),
+    fluent.PaneItemSeparator(),
   ];
-  final pageStorageBucket = PageStorageBucket();
-  int topIndex = 0;
-  bool isPaneOpen = false;
+
   @override
   Widget build(BuildContext context) {
     return PageStorage(
@@ -189,10 +126,8 @@ class _DashboardState extends State<Dashboard>
               width: 120.w,
             ),
           ),
-
           selected: topIndex,
           onChanged: (index) => setState(() => topIndex = index),
-          // displayMode: displayMode,
           items: items,
           footerItems: [
             // fluent.PaneItem(
@@ -205,7 +140,7 @@ class _DashboardState extends State<Dashboard>
             //       fontWeight: FontWeight.w300,
             //     ),
             //   ),
-            //   body: DashboardOverview(),
+            //   body: const Settings(),
             // ),
             fluent.PaneItemAction(
               icon: const Icon(fluent.FluentIcons.power_button, size: 18),
@@ -218,8 +153,32 @@ class _DashboardState extends State<Dashboard>
                 ),
               ),
               onTap: () {
-                GetStorage().erase();
-                Phoenix.rebirth(context);
+                fluent.showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (context) {
+                      return fluent.ContentDialog(
+                        title: heading(text: 'Log out'),
+                        content: paragraph(
+                            text: 'Are you sure you want to log out?'),
+                        actions: [
+                          fluent.Button(
+                            onPressed: () {
+                              GetStorage().erase();
+                              Phoenix.rebirth(context);
+                              Navigator.pop(context);
+                            },
+                            child: label(text: 'Yes'),
+                          ),
+                          fluent.Button(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: label(text: 'No'),
+                          ),
+                        ],
+                      );
+                    });
               },
             ),
             fluent.PaneItemSeparator(),
@@ -309,8 +268,7 @@ class StatCard extends StatelessWidget {
       required this.description,
       required this.pictureUrl,
       required this.advertId,
-      required this.pad
-      })
+      required this.pad})
       : super(key: key);
   final IconData iconData;
   final int capacity;
@@ -344,10 +302,7 @@ class StatCard extends StatelessWidget {
                       children: [
                         heading(text: title, color: baseColor),
                         10.ph,
-                        paragraph(
-                            text:
-                                description,
-                            color: Colors.black54),
+                        paragraph(text: description, color: Colors.black54),
                         20.ph,
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -394,10 +349,14 @@ class StatCard extends StatelessWidget {
                               color: baseColor),
                           10.pw,
                           fluent.Button(
-                          onPressed: (){
-                            Clipboard.setData(ClipboardData(text: 'https://app.mywater.agency/$advertId'));
-                             ScreenOverlay.showToast(context, title: 'Successful', message: 'Link copied to clipboard');
-                          },
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(
+                                  text:
+                                      'https://app.mywater.agency/$advertId'));
+                              ScreenOverlay.showToast(context,
+                                  title: 'Successful',
+                                  message: 'Link copied to clipboard');
+                            },
                             child: fluent.Row(
                               children: [
                                 paragraph(text: 'Copy Link'),
@@ -420,17 +379,22 @@ class StatCard extends StatelessWidget {
                               eyeStyle:
                                   const QrEyeStyle(eyeShape: QrEyeShape.circle),
                               foregroundColor: baseColor,
-                              
-                              data:
-                                  'https://app.mywater.agency/$advertId',
+                              data: 'https://app.mywater.agency/$advertId',
                               size: 110.w),
                         ),
-                        Image.network(
-                          pictureUrl,
+                        SizedBox(
                           width: 600.w,
                           height: 400.h,
+                          child: OctoImage(
+                            placeholderBuilder: OctoBlurHashFix.placeHolder(
+                                'LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
+                            errorBuilder: OctoError.icon(color: Colors.red),
+                            image: CachedNetworkImageProvider(
+                              pictureUrl,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        
                       ],
                     ),
                   ),
@@ -438,13 +402,12 @@ class StatCard extends StatelessWidget {
               });
         },
         child: Padding(
-          padding: EdgeInsets.only( right: pad ? 4.w : 0),
+          padding: EdgeInsets.only(right: pad ? 4.w : 0),
           child: Material(
             elevation: 10.0,
             shadowColor: Colors.black26,
             borderRadius: BorderRadius.circular(6.r),
             child: Container(
-              
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
               decoration: BoxDecoration(
                   border: Border.all(color: baseColorLight, width: 0.4),
@@ -523,8 +486,8 @@ class StatCard extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2.r),
                           border: Border.all(color: baseColorLight, width: 0.5),
@@ -533,8 +496,8 @@ class StatCard extends StatelessWidget {
                       ),
                       2.pw,
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2.r),
                           border: Border.all(color: baseColorLight, width: 0.5),

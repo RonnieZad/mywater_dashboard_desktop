@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 import 'dart:io';
 
 import 'package:countries_world_map/countries_world_map.dart';
@@ -26,22 +26,14 @@ class DashboardOverview extends StatefulWidget {
 }
 
 class DashboardOverviewState extends State<DashboardOverview> {
-  // PropertyController propertyController = Get.put(PropertyController());
+  
   CampaignController campaignController = Get.put(CampaignController());
 
   final contextController = fluent.FlyoutController();
   final contextAttachKey = GlobalKey();
   Color? selectedDistrict;
 
-  final List<Color> campaignPlotColors = [
-    Colors.blue,
-    Colors.red,
-    Colors.green,
-    Colors.purple,
-    Colors.orange,
-    Colors.yellow,
-    Colors.pink,
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {
