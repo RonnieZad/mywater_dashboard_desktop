@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -58,6 +59,8 @@ class AuthController extends GetxController {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
         GetStorage().write('partnerData', response['payload']['data']);
+        Phoenix.rebirth(context);
+        Get.reset();
 
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Dashboard()));
@@ -109,7 +112,8 @@ class AuthController extends GetxController {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
         GetStorage().write('partnerData', response['payload']['data']);
-
+        Phoenix.rebirth(context);
+        Get.reset();
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Dashboard()));
       } else {
