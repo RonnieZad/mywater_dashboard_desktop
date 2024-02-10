@@ -138,7 +138,7 @@ class _LineChartState extends State<_LineChart> {
             lineBarsData: lineData,
             minX: 0,
             maxX: 3,
-            maxY: totalImpressions.toDouble(),
+            maxY: totalImpressions.toDouble() ,
             minY: 0,
           ),
         ),
@@ -150,6 +150,9 @@ class _LineChartState extends State<_LineChart> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 heading(text: 'Total Impressions'),
+                // heading(
+                //     text: totalImpressions.toString(),
+                //    ),
               ],
             ),
             fluent.ComboBox<String>(
@@ -180,35 +183,18 @@ class _LineChartState extends State<_LineChart> {
       fontWeight: FontWeight.w500,
       fontSize: 12,
     );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '1m';
-        break;
-      case 2:
-        text = '2m';
-        break;
-      case 3:
-        text = '3m';
-        break;
-      case 4:
-        text = '5m';
-        break;
-      case 5:
-        text = '6m';
-        break;
-      default:
-        return Container();
-    }
+    // String text;
+    return Text(value.toInt().toString(), style: style, textAlign: TextAlign.center);
+  
 
-    return Text(text, style: style, textAlign: TextAlign.center);
+    // return Text(text, style: style, textAlign: TextAlign.center);
   }
 
   SideTitles leftTitles() => SideTitles(
         getTitlesWidget: leftTitleWidgets,
         showTitles: true,
         interval: 1,
-        reservedSize: 40,
+        // reservedSize: 40,
       );
 
   FlGridData get gridData => FlGridData(show: false);

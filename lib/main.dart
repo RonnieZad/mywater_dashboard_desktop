@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
@@ -21,11 +22,14 @@ class MyHttpOverrides extends HttpOverrides {
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
 
-  await WindowManager.instance.setTitle("My Water");
+  if (!kIsWeb) {
+    await windowManager.ensureInitialized();
 
-  await WindowManager.instance.setFullScreen(true);
+    await WindowManager.instance.setTitle("My Water");
+
+    await WindowManager.instance.setFullScreen(true);
+  }
 
   await GetStorage.init();
   runApp(

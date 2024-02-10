@@ -344,7 +344,7 @@ class StatCard extends StatelessWidget {
                         20.ph,
                         Row(mainAxisSize: MainAxisSize.min, children: [
                           paragraph(
-                              text: 'https://app.mywater.agency/$advertId',
+                              text: 'https://app.mywater.agency/?code=$advertId',
                               fontSize: 9.sp,
                               color: baseColor),
                           10.pw,
@@ -352,7 +352,7 @@ class StatCard extends StatelessWidget {
                             onPressed: () {
                               Clipboard.setData(ClipboardData(
                                   text:
-                                      'https://app.mywater.agency/$advertId'));
+                                      'https://app.mywater.agency/?code=$advertId'));
                               ScreenOverlay.showToast(context,
                                   title: 'Successful',
                                   message: 'Link copied to clipboard');
@@ -379,7 +379,7 @@ class StatCard extends StatelessWidget {
                               eyeStyle:
                                   const QrEyeStyle(eyeShape: QrEyeShape.circle),
                               foregroundColor: baseColor,
-                              data: 'https://app.mywater.agency/$advertId',
+                              data: 'https://app.mywater.agency/?code=$advertId',
                               size: 110.w),
                         ),
                         SizedBox(
