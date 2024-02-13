@@ -9,10 +9,12 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
+import 'package:mywater_dashboard_revamp/v1/constants/strings.dart';
 
 import 'package:mywater_dashboard_revamp/v1/screens/app_dashboard.dart';
 import 'package:mywater_dashboard_revamp/v1/screens/company_profile.dart';
 import 'package:mywater_dashboard_revamp/v1/screens/settings.dart';
+import 'package:mywater_dashboard_revamp/v1/services/websocket_service.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
 import 'package:octo_image/octo_image.dart';
@@ -29,6 +31,12 @@ class _DashboardState extends State<Dashboard> {
   final pageStorageBucket = PageStorageBucket();
   int topIndex = 0;
   bool isPaneOpen = false;
+
+  @override
+  void initState() {
+    WebSocketService.initiateAndListenConnection(context, socketServiceUrl);
+    super.initState();
+  }
 
   List<fluent.NavigationPaneItem> items = [
     fluent.PaneItemSeparator(),
@@ -184,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
             fluent.PaneItemSeparator(),
             isPaneOpen
                 ? fluent.PaneItemHeader(
-                    header: SizedBox.shrink(),
+                    header: const SizedBox.shrink(),
                   )
                 : fluent.PaneItemHeader(
                     header: fluent.Padding(
@@ -283,7 +291,8 @@ class StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(pad);
+    Map<String, dynamic> profileData = GetStorage().read('partnerData');
+
     return Expanded(
       child: InkWell(
         onTap: () {
@@ -344,7 +353,8 @@ class StatCard extends StatelessWidget {
                         20.ph,
                         Row(mainAxisSize: MainAxisSize.min, children: [
                           paragraph(
-                              text: 'https://app.mywater.agency/?code=$advertId',
+                              text:
+                                  'https://app.mywater.agency/?code=$advertId',
                               fontSize: 9.sp,
                               color: baseColor),
                           10.pw,
@@ -379,7 +389,10 @@ class StatCard extends StatelessWidget {
                               eyeStyle:
                                   const QrEyeStyle(eyeShape: QrEyeShape.circle),
                               foregroundColor: baseColor,
-                              data: 'https://app.mywater.agency/?code=$advertId',
+                              data:
+                                  'https://app.mywater.agency/?code=$advertId',
+                              embeddedImage: CachedNetworkImageProvider(
+                                  profileData['company_logo']),
                               size: 110.w),
                         ),
                         SizedBox(
@@ -419,34 +432,7 @@ class StatCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Row(
-                          //   children: [
-                          //     capacityPrefix != null
-                          //         ? Row(
-                          //             children: [
-                          //               label(
-                          //                   text: capacityPrefix!,
-                          //                   fontSize: 12.sp),
-                          //               5.pw,
-                          //             ],
-                          //           )
-                          //         : const SizedBox.shrink(),
-                          //     headingBig(
-                          //         text: NumberFormat.decimalPattern()
-                          //             .format(capacity)),
-                          //   ],
-                          // ),
-                          paragraphBold(text: title, color: color),
-                        ],
-                      ),
-                      // Icon(
-                      //   iconData,
-                      //   color: baseColorLight,
-                      //   size: 25.w,
-                      // )
+                      paragraphBold(text: title, color: color),
                     ],
                   ),
                   6.ph,
@@ -504,7 +490,7 @@ class StatCard extends StatelessWidget {
                         ),
                         child: paragraph(text: '$capacity Scans'),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       paragraph(text: 'View Details', color: baseColor),
                       5.pw,
                       Icon(
@@ -523,47 +509,3 @@ class StatCard extends StatelessWidget {
     );
   }
 }
-
-// class MenuWidget extends StatelessWidget {
-//   const MenuWidget(
-//       {Key? key,
-//       this.isSelected = false,
-//       required this.title,
-//       required this.iconData,
-//       required this.action})
-//       : super(key: key);
-//   final String title;
-//   final IconData iconData;
-//   final VoidCallback action;
-//   final bool? isSelected;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(vertical: 8.h),
-//       child: InkWell(
-//         onTap: action,
-//         child: Container(
-//           padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 5.w),
-//           decoration: BoxDecoration(
-//               color: isSelected == true ? Colors.white24 : Colors.transparent,
-//               borderRadius: BorderRadius.only(
-//                   topLeft: Radius.circular(5.r),
-//                   bottomLeft: Radius.circular(5.r))),
-//           child: Row(
-//             // mainAxisSize: MainAxisSize.min,
-//             children: [
-//               Icon(
-//                 iconData,
-//                 color: Colors.white,
-//                 size: 15.w,
-//               ),
-//               4.pw,
-//               paragraphSmall(text: title, color: Colors.white)
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

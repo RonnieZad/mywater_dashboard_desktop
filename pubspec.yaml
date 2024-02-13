@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.3.1
   octo_image: ^2.0.0
   flutter_blurhash: ^0.8.2
+  web_socket_client: ^0.1.0
 
 dev_dependencies:
   flutter_test:

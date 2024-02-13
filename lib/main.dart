@@ -44,65 +44,66 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(1280, 890),
-        builder: (c, w) => GestureDetector(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
-              if (!currentFocus.hasPrimaryFocus &&
-                  currentFocus.focusedChild != null) {
-                currentFocus.focusedChild!.unfocus();
-              }
-            },
-            child: fluent.FluentApp(
-              title: 'Enyumba Admin',
-              themeMode: ThemeMode.system,
-              debugShowCheckedModeBanner: false,
-              // color: baseColor,
-              darkTheme: fluent.FluentThemeData(
-                brightness: Brightness.light,
-                // accentColor: fluent.Colors.blue,
-                visualDensity: VisualDensity.standard,
-                focusTheme: fluent.FocusThemeData(
-                  glowFactor: fluent.is10footScreen(context) ? 2.0 : 0.0,
-                ),
+      designSize: const Size(1280, 890),
+      builder: (c, w) => GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            currentFocus.focusedChild!.unfocus();
+          }
+        },
+        child: fluent.FluentApp(
+          title: 'MyWater Dashboard',
+          themeMode: ThemeMode.system,
+          debugShowCheckedModeBanner: false,
+          // color: baseColor,
+          darkTheme: fluent.FluentThemeData(
+            brightness: Brightness.light,
+            // accentColor: fluent.Colors.blue,
+            visualDensity: VisualDensity.standard,
+            focusTheme: fluent.FocusThemeData(
+              glowFactor: fluent.is10footScreen(context) ? 2.0 : 0.0,
+            ),
+          ),
+          theme: fluent.FluentThemeData(
+            // accentColor: appTheme.color,
+            visualDensity: VisualDensity.standard,
+            focusTheme: fluent.FocusThemeData(
+              glowFactor: fluent.is10footScreen(context) ? 2.0 : 0.0,
+            ),
+          ),
+          locale: const Locale('en', 'US'),
+          onGenerateRoute: (settings) {
+            switch (settings.name) {
+              case '/auth':
+                return MaterialPageRoute(builder: (_) => const AuthScreen());
+              case '/dashboard':
+                return MaterialPageRoute(builder: (_) => const Dashboard());
+              default:
+                return MaterialPageRoute(
+                    builder: (_) => Scaffold(
+                          body: Center(
+                              child: Text(
+                                  'No route defined for ${settings.name}')),
+                        ));
+            }
+          },
+          initialRoute:
+              GetStorage().read('token') == null ? '/auth' : '/dashboard',
+          builder: (context, child) {
+            return Directionality(
+              textDirection: TextDirection.ltr,
+              child: fluent.NavigationPaneTheme(
+                data: fluent.NavigationPaneThemeData(
+                    labelPadding: EdgeInsets.symmetric(horizontal: 20.w),
+                    backgroundColor: null),
+                child: Material(child: child!),
               ),
-              theme: fluent.FluentThemeData(
-                // accentColor: appTheme.color,
-                visualDensity: VisualDensity.standard,
-                focusTheme: fluent.FocusThemeData(
-                  glowFactor: fluent.is10footScreen(context) ? 2.0 : 0.0,
-                ),
-              ),
-              locale: const Locale('en', 'US'),
-              onGenerateRoute: (settings) {
-                switch (settings.name) {
-                  case '/auth':
-                    return MaterialPageRoute(
-                        builder: (_) => const AuthScreen());
-                  case '/dashboard':
-                    return MaterialPageRoute(builder: (_) => const Dashboard());
-                  default:
-                    return MaterialPageRoute(
-                        builder: (_) => Scaffold(
-                              body: Center(
-                                  child: Text(
-                                      'No route defined for ${settings.name}')),
-                            ));
-                }
-              },
-              initialRoute:
-                  GetStorage().read('token') == null ? '/auth' : '/dashboard',
-              builder: (context, child) {
-                return Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: fluent.NavigationPaneTheme(
-                    data: fluent.NavigationPaneThemeData(
-                        labelPadding: EdgeInsets.symmetric(horizontal: 20.w),
-                        backgroundColor: null),
-                    child: Material(child: child!),
-                  ),
-                );
-              },
-            )));
+            );
+          },
+        ),
+      ),
+    );
   }
 }

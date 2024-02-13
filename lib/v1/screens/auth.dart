@@ -118,11 +118,17 @@ class _AuthScreenState extends State<AuthScreen> {
                                   .artworkFile.value!.files.isNotEmpty) ...[
                                 CircleAvatar(
                                   radius: 60.r,
-                                  child: Image.file(
-                                    File(authController
-                                        .artworkFile.value!.files.first.path!),
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: kIsWeb
+                                      ? Image.memory(
+                                          authController.artworkFile.value!
+                                              .files.first.bytes!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.file(
+                                          File(authController.artworkFile.value!
+                                              .files.first.path!),
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                                 20.ph,
                               ],
@@ -335,6 +341,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                             await uploadImageToImageKit(
                                                 context,
                                                 imageBytes,
+                                                'myWaterCompanyLogos');
+                                      } else {
+                                        Uint8List? pickedFile = file.bytes;
+
+                                        uploadedImageUrl =
+                                            await uploadImageToImageKit(
+                                                context,
+                                                pickedFile!.toList(),
                                                 'myWaterCompanyLogos');
                                       }
                                     }
