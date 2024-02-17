@@ -1,14 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:get_storage/get_storage.dart';
-import 'package:mywater_dashboard_revamp/v1/screens/company_profile.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/ui_helpers.dart';
 import 'package:octo_image/octo_image.dart';
-
-
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
