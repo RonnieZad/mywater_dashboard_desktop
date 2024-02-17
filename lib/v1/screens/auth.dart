@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,11 +11,10 @@ import 'package:get/get.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
 import 'package:mywater_dashboard_revamp/v1/controller/auth_controller.dart';
 import 'package:mywater_dashboard_revamp/v1/models/authentication_model.dart';
-import 'package:mywater_dashboard_revamp/v1/screens/company_profile.dart';
-import 'package:mywater_dashboard_revamp/v1/screens/dashboard.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/file_picker.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/ui_helpers.dart';
 import 'package:octo_image/octo_image.dart';
 
 class AuthScreen extends StatefulWidget {
