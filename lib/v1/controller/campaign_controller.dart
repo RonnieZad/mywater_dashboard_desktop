@@ -17,6 +17,9 @@ class CampaignController extends GetxController {
   TextEditingController campaignDescriptionController = TextEditingController();
   TextEditingController campaignStartDateController = TextEditingController();
   TextEditingController campaignEndDateController = TextEditingController();
+  TextEditingController campaignSurveyQuestionOneController = TextEditingController();
+  TextEditingController campaignSurveyQuestionTwoController = TextEditingController();
+  TextEditingController campaignSurveyQuestionThreeController = TextEditingController();
 
   final _campaigns = <CampaignModel>[].obs;
 
