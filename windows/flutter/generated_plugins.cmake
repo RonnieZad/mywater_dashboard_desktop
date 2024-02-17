@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_storage
   flutter_acrylic
   screen_retriever
+  url_launcher_windows
   window_manager
 )
 
