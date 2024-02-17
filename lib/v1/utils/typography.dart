@@ -121,7 +121,7 @@ Widget paragraphSmallItalic(
         int delay = 0}) =>
     Text(text,
             style: TextStyle(
-                fontSize: 12.5.sp,
+                fontSize: 11.5.sp,
                 color: color,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Poppins'),
