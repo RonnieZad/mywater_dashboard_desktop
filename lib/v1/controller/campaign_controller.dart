@@ -22,11 +22,8 @@ class CampaignController extends GetxController {
   TextEditingController campaignSurveyQuestionThreeController = TextEditingController();
 
   final _campaigns = <CampaignModel>[].obs;
-
   final _campaignMetrics = <CampaignMetrics>[].obs;
 
-
-  
   List<CampaignMetrics> get getCampaignMetricsData => _campaignMetrics;
   List<CampaignModel> get campaigns => _campaigns;
 
@@ -39,7 +36,18 @@ class CampaignController extends GetxController {
     getCampaignMetrics();
   }
 
-  void fetchCampaigns() async {
+  _clearCreateCampaignSheet() {
+    campaignTitleController.clear();
+    campaignDescriptionController.clear();
+    campaignStartDateController.clear();
+    campaignEndDateController.clear();
+    campaignSurveyQuestionOneController.clear();
+    campaignSurveyQuestionTwoController.clear();
+    campaignSurveyQuestionThreeController.clear();
+    artworkFile = const FilePickerResult([]).obs;
+  }
+
+  Future<void> fetchCampaigns() async {
     return ApiService.getRequest(
             endPoint: '/get_user_label_advert/$partnerId',
             service: Services.application)
@@ -47,7 +55,7 @@ class CampaignController extends GetxController {
       debugPrint(response.toString());
       if (response['payload']['status'] >= 200 &&
           response['payload']['status'] < 300) {
-            print(response['payload']['adverts']);
+        print(response['payload']['adverts']);
         _campaigns.value = (response['payload']['adverts'] as List)
             .map((e) => CampaignModel.fromJson(e))
             .toList();
@@ -82,6 +90,7 @@ class CampaignController extends GetxController {
         });
         debugPrint(response['payload']['error'].toString());
       }
+      _clearCreateCampaignSheet();
     });
   }
 
@@ -92,7 +101,7 @@ class CampaignController extends GetxController {
       debugPrint(response.toString());
       if (response['payload']['status'] >= 200 &&
           response['payload']['status'] < 300) {
-            _campaignMetrics.value =  (response['payload']['analytics'] as List)
+        _campaignMetrics.value = (response['payload']['analytics'] as List)
             .map((e) => CampaignMetrics.fromJson(e))
             .toList();
         debugPrint(response['payload']['metrics'].toString());

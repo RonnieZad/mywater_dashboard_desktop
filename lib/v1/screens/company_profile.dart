@@ -2,10 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
+import 'package:mywater_dashboard_revamp/v1/controller/auth_controller.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/app_button.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/edit_company_profile.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/widgets/ui_helpers.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,6 +23,7 @@ class CompanyProfile extends StatefulWidget {
 
 class CompanyProfileState extends State<CompanyProfile> {
   Map<String, dynamic> profileData = GetStorage().read('partnerData');
+  AuthController authController = Get.put(AuthController());
 
   final contextController = fluent.FlyoutController();
   final contextAttachKey = GlobalKey();
@@ -30,13 +35,14 @@ class CompanyProfileState extends State<CompanyProfile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin:
-              EdgeInsets.only( left: 20.w, right: 20.0),  
+          margin: EdgeInsets.only(left: 20.w, right: 20.0),
           padding:
               EdgeInsets.only(bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
-          decoration:  BoxDecoration(color: Colors.white,
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.r), bottomRight: Radius.circular(6.r))
-          ),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(6.r),
+                  bottomRight: Radius.circular(6.r))),
           child: Row(
             children: [
               Column(
@@ -116,7 +122,19 @@ class CompanyProfileState extends State<CompanyProfile> {
                             ),
                             fluent.Button(
                               child: label(text: 'Edit Profile'),
-                              onPressed: () => debugPrint('pressed button'),
+                              onPressed: () {
+                                authController.companyDescriptionController
+                                    .text = profileData['company_description'];
+                                authController.emailController.text =
+                                    profileData['company_email'];
+                                authController.companyWebsiteController.text =
+                                    profileData['company_website'];
+                                authController.companyNameController.text =
+                                    profileData['company_name'];
+                                ScreenAppOverlay.showAppDialogWindow(context,
+                                    body: EditCompanyProfile(
+                                        authController: authController));
+                              },
                             )
                           ],
                         ),
@@ -134,29 +152,17 @@ class CompanyProfileState extends State<CompanyProfile> {
                             text: 'Email: ${profileData['company_email']}'),
                         10.ph,
                         paragraphSmallItalic(
-                            text: 'Website: ${profileData['company_website']}'),
-                        10.ph,
-                        paragraphSmallItalic(
                             text: 'Phone: +${profileData['company_phone']}'),
                         40.ph,
-                        SizedBox(
-                          height: 45.h,
-                          child: fluent.FilledButton(
-                            child: fluent.Center(
-                                child: label(
-                              text: 'Get Support',
-                              color: Colors.white,
-                              fontSize: 10.sp,
-                            )),
-                            onPressed: () {
+                        AppButton(
+                            action: () {
                               final Uri emailLaunchUri = Uri(
                                 scheme: 'mailto',
                                 path: 'info@mywater.agency',
                               );
                               launchUrl(emailLaunchUri);
                             },
-                          ),
-                        )
+                            buttonLabel: 'Get Support'),
                       ],
                     ),
                   ),
@@ -214,8 +220,7 @@ class CompanyProfileState extends State<CompanyProfile> {
                                   text:
                                       'Your collaborating team members will\nappear here',
                                   color: Colors.black38,
-                                  textAlign:TextAlign.center
-                                  )
+                                  textAlign: TextAlign.center)
                             ],
                           ),
                         ),

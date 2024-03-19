@@ -22,6 +22,17 @@ class AuthController extends GetxController {
   TextEditingController companyDescriptionController = TextEditingController();
   TextEditingController companyWebsiteController = TextEditingController();
 
+  _clearAuthForm() {
+    artworkFile = const FilePickerResult([]).obs;
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    phoneNumberController.clear();
+    companyNameController.clear();
+    companyDescriptionController.clear();
+    companyWebsiteController.clear();
+  }
+
   ///create accouny for partner account
   createPartnerAccount(context, {required AuthenticationModel authModel}) {
     fluent.showDialog(
@@ -71,6 +82,7 @@ class AuthController extends GetxController {
             message: response['payload']['error'],
             isError: true);
       }
+      _clearAuthForm();
     });
   }
 
@@ -123,6 +135,7 @@ class AuthController extends GetxController {
             message: response['payload']['error'],
             isError: true);
       }
+      _clearAuthForm();
     });
   }
 }

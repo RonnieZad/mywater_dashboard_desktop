@@ -14,6 +14,8 @@ import 'package:mywater_dashboard_revamp/v1/models/authentication_model.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/file_picker.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/app_button.dart';
+import 'package:mywater_dashboard_revamp/v1/widgets/text_box.dart';
 import 'package:mywater_dashboard_revamp/v1/widgets/ui_helpers.dart';
 import 'package:octo_image/octo_image.dart';
 
@@ -53,30 +55,11 @@ class _AuthScreenState extends State<AuthScreen> {
                       fontSize: 16.sp),
                   const Spacer(),
                   if (oldUser) ...[
-                    fluent.InfoLabel(
-                      label: 'Enter email address',
-                      labelStyle:
-                          TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
-                      child: fluent.TextBox(
-                        prefix: fluent.Padding(
-                          padding: EdgeInsets.only(left: 20.w),
-                          child: Icon(
-                            fluent.FluentIcons.mail,
-                            color: Colors.black54,
-                            size: 13.w,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 15.h, horizontal: 10.w),
-                        controller: authController.emailController,
-                        placeholder: 'eg info@example.com',
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 12.sp,
-                            color: Colors.black54),
-                        expands: false,
-                      ),
-                    ),
+                    AppTextBox(
+                        title: 'Enter company mail',
+                        textEditingController: authController.emailController,
+                        hintText: 'eg info@example.com',
+                        icon: fluent.FluentIcons.mail),
                     20.ph,
                     fluent.InfoLabel(
                       label: 'Enter Password',
@@ -146,136 +129,41 @@ class _AuthScreenState extends State<AuthScreen> {
                                 ),
                               ),
                               20.ph,
-                              fluent.InfoLabel(
-                                label: 'Enter email address',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 13.sp),
-                                child: fluent.TextBox(
-                                  prefix: fluent.Padding(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Icon(
-                                      fluent.FluentIcons.mail,
-                                      color: Colors.black54,
-                                      size: 13.w,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 10.w),
-                                  controller: authController.emailController,
-                                  placeholder: 'eg info@example.com',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.sp,
-                                      color: Colors.black54),
-                                  expands: false,
-                                ),
-                              ),
+                              AppTextBox(
+                                  title: 'Enter company mail',
+                                  textEditingController:
+                                      authController.emailController,
+                                  hintText: 'eg info@example.com',
+                                  icon: fluent.FluentIcons.mail),
                               20.ph,
-                              fluent.InfoLabel(
-                                label: 'Enter company name',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 13.sp),
-                                child: fluent.TextBox(
-                                  prefix: fluent.Padding(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Icon(
-                                      fluent.FluentIcons.text_field,
-                                      color: Colors.black54,
-                                      size: 13.w,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 10.w),
-                                  controller:
+                              AppTextBox(
+                                  title: 'Enter company name',
+                                  textEditingController:
                                       authController.companyNameController,
-                                  placeholder: 'eg Acme Ltd',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.sp,
-                                      color: Colors.black54),
-                                  expands: false,
-                                ),
-                              ),
+                                  hintText: 'eg Acme Ltd',
+                                  icon: fluent.FluentIcons.text_field),
                               20.ph,
-                              fluent.InfoLabel(
-                                label: 'Enter company description',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 13.sp),
-                                child: fluent.TextBox(
-                                  prefix: fluent.Padding(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Icon(
-                                      fluent.FluentIcons.text_field,
-                                      color: Colors.black54,
-                                      size: 13.w,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 10.w),
-                                  controller: authController
+                              AppTextBox(
+                                  title: 'Enter company description',
+                                  textEditingController: authController
                                       .companyDescriptionController,
-                                  placeholder:
+                                  hintText:
                                       'eg We are a leading company in the region',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.sp,
-                                      color: Colors.black54),
-                                  expands: false,
-                                ),
-                              ),
+                                  icon: fluent.FluentIcons.text_field),
                               20.ph,
-                              fluent.InfoLabel(
-                                label: 'Enter company phone number',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 13.sp),
-                                child: fluent.TextBox(
-                                  maxLength: 12,
-                                  prefix: fluent.Padding(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Icon(
-                                      fluent.FluentIcons.phone,
-                                      color: Colors.black54,
-                                      size: 13.w,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 10.w),
-                                  controller:
+                              AppTextBox(
+                                  title: 'Enter company phone number',
+                                  textEditingController:
                                       authController.phoneNumberController,
-                                  placeholder: 'eg +256 700 000 000',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.sp,
-                                      color: Colors.black54),
-                                  expands: false,
-                                ),
-                              ),
+                                  hintText: 'eg +256 700 000 000',
+                                  icon: fluent.FluentIcons.phone),
                               20.ph,
-                              fluent.InfoLabel(
-                                label: 'Enter company website',
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 13.sp),
-                                child: fluent.TextBox(
-                                  prefix: fluent.Padding(
-                                    padding: EdgeInsets.only(left: 20.w),
-                                    child: Icon(
-                                      fluent.FluentIcons.globe,
-                                      color: Colors.black54,
-                                      size: 13.w,
-                                    ),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 10.w),
-                                  controller:
+                              AppTextBox(
+                                  title: 'Enter company website',
+                                  textEditingController:
                                       authController.companyWebsiteController,
-                                  placeholder: 'eg www.acme.com',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12.sp,
-                                      color: Colors.black54),
-                                  expands: false,
-                                ),
-                              ),
+                                  hintText: 'eg www.acme.com',
+                                  icon: fluent.FluentIcons.globe),
                               20.ph,
                               fluent.InfoLabel(
                                 label: 'Enter Password',
@@ -308,140 +196,111 @@ class _AuthScreenState extends State<AuthScreen> {
                     })
                   ],
                   20.ph,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 45.h,
-                          child: fluent.Acrylic(
-                            blurAmount: 40,
-                            child: fluent.FilledButton(
-                              child: fluent.Center(
-                                  child: label(
-                                text: oldUser ? 'Sign in' : 'Create Account',
-                                color: Colors.white,
-                                fontSize: 10.sp,
-                              )),
-                              onPressed: () async {
-                                String? uploadedImageUrl;
+                  AppButton(
+                    action: () async {
+                      String? uploadedImageUrl;
 
-                                if (!oldUser) {
-                                  if (authController
-                                      .artworkFile.value!.files.isNotEmpty) {
-                                    for (PlatformFile file in authController
-                                        .artworkFile.value!.files) {
-                                      if (!kIsWeb) {
-                                        File pickedFile = File(file.path!);
+                      if (!oldUser) {
+                        if (authController
+                            .artworkFile.value!.files.isNotEmpty) {
+                          for (PlatformFile file
+                              in authController.artworkFile.value!.files) {
+                            if (!kIsWeb) {
+                              File pickedFile = File(file.path!);
 
-                                        final List<int> imageBytes =
-                                            await pickedFile.readAsBytes();
-                                        uploadedImageUrl =
-                                            await uploadImageToImageKit(
-                                                context,
-                                                imageBytes,
-                                                'myWaterCompanyLogos');
-                                      } else {
-                                        Uint8List? pickedFile = file.bytes;
+                              final List<int> imageBytes =
+                                  await pickedFile.readAsBytes();
+                              uploadedImageUrl = await uploadImageToImageKit(
+                                  context, imageBytes, 'myWaterCompanyLogos');
+                            } else {
+                              Uint8List? pickedFile = file.bytes;
 
-                                        uploadedImageUrl =
-                                            await uploadImageToImageKit(
-                                                context,
-                                                pickedFile!.toList(),
-                                                'myWaterCompanyLogos');
-                                      }
-                                    }
-                                  }
-                                }
-                                AuthenticationModel authenticationModel =
-                                    AuthenticationModel(
-                                  logoUrl: uploadedImageUrl,
-                                  role: 'advertiser',
-                                  email: authController.emailController.text,
-                                  password:
-                                      authController.passwordController.text,
-                                  phoneNumber:
-                                      authController.phoneNumberController.text,
-                                  companyName:
-                                      authController.companyNameController.text,
-                                  description: authController
-                                      .companyDescriptionController.text,
-                                  website: authController
-                                      .companyWebsiteController.text,
-                                );
+                              uploadedImageUrl = await uploadImageToImageKit(
+                                  context,
+                                  pickedFile!.toList(),
+                                  'myWaterCompanyLogos');
+                            }
+                          }
+                        }
+                      }
+                      AuthenticationModel authenticationModel =
+                          AuthenticationModel(
+                        logoUrl: uploadedImageUrl,
+                        role: 'advertiser',
+                        email: authController.emailController.text,
+                        password: authController.passwordController.text,
+                        phoneNumber: authController.phoneNumberController.text,
+                        companyName: authController.companyNameController.text,
+                        description:
+                            authController.companyDescriptionController.text,
+                        website: authController.companyWebsiteController.text,
+                      );
 
-                                if (oldUser) {
-                                  if (authController
-                                      .emailController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Email is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .passwordController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Password is required',
-                                        isWarning: true);
-                                  } else {
-                                    authController.loginPartnerAccount(context,
-                                        authModel: authenticationModel);
-                                  }
-                                } else {
-                                  if (authController.artworkFile == null) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Attach artwork',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .emailController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Email is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .companyNameController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Company Name is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .companyDescriptionController
-                                      .text
-                                      .isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message:
-                                            'Company Description is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .phoneNumberController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Phone Number is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .companyWebsiteController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Company Website is required',
-                                        isWarning: true);
-                                  } else if (authController
-                                      .passwordController.text.isEmpty) {
-                                    ScreenOverlay.showToast(context,
-                                        title: 'Missing Field',
-                                        message: 'Password is required',
-                                        isWarning: true);
-                                  } else {
-                                    authController.createPartnerAccount(context,
-                                        authModel: authenticationModel);
-                                  }
-                                }
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      if (oldUser) {
+                        if (authController.emailController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Email is required',
+                              isWarning: true);
+                        } else if (authController
+                            .passwordController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Password is required',
+                              isWarning: true);
+                        } else {
+                          authController.loginPartnerAccount(context,
+                              authModel: authenticationModel);
+                        }
+                      } else {
+                        if (authController.artworkFile == null) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Attach artwork',
+                              isWarning: true);
+                        } else if (authController
+                            .emailController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Email is required',
+                              isWarning: true);
+                        } else if (authController
+                            .companyNameController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Company Name is required',
+                              isWarning: true);
+                        } else if (authController
+                            .companyDescriptionController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Company Description is required',
+                              isWarning: true);
+                        } else if (authController
+                            .phoneNumberController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Phone Number is required',
+                              isWarning: true);
+                        } else if (authController
+                            .companyWebsiteController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Company Website is required',
+                              isWarning: true);
+                        } else if (authController
+                            .passwordController.text.isEmpty) {
+                          ScreenOverlay.showToast(context,
+                              title: 'Missing Field',
+                              message: 'Password is required',
+                              isWarning: true);
+                        } else {
+                          authController.createPartnerAccount(context,
+                              authModel: authenticationModel);
+                        }
+                      }
+                    },
+                    buttonLabel: oldUser ? 'Sign in' : 'Create Account',
                   ),
                   20.ph,
                   Row(
