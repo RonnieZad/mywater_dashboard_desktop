@@ -15,6 +15,7 @@ class CampaignController extends GetxController {
 
   TextEditingController campaignTitleController = TextEditingController();
   TextEditingController campaignDescriptionController = TextEditingController();
+  TextEditingController campaignPublicUrlController = TextEditingController();
   TextEditingController campaignStartDateController = TextEditingController();
   TextEditingController campaignEndDateController = TextEditingController();
   TextEditingController campaignSurveyQuestionOneController = TextEditingController();
