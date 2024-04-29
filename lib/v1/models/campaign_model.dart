@@ -2,6 +2,7 @@ class CampaignModel {
   final String promotionText;
   final String promotionDescription;
   final String pictureUrl;
+  final String? promotionPublicUrl;
   final String? advertId;
   final String? creationDate;
   final String? expiryDate;
@@ -13,6 +14,7 @@ class CampaignModel {
     required this.promotionText,
     required this.promotionDescription,
     required this.pictureUrl,
+     this.promotionPublicUrl,
     this.advertId,
     this.creationDate,
     this.expiryDate,
@@ -26,6 +28,7 @@ class CampaignModel {
       advertId: json['advert_id'],
       promotionText: json['promotion_text'],
       promotionDescription: json['promotion_description'],
+      promotionPublicUrl: json['advert_public_url'],
       pictureUrl: json['picture_url'],
       creationDate: json['creation_date'],
       expiryDate: json['expiry_date'] ?? '',
@@ -40,6 +43,7 @@ class CampaignModel {
       'advert_id': advertId,
       'promotion_text': promotionText,
       'promotion_description': promotionDescription,
+      'advert_public_url': promotionPublicUrl,
       'picture_url': pictureUrl,
       'creation_date': creationDate,
       'expiry_date': expiryDate,
