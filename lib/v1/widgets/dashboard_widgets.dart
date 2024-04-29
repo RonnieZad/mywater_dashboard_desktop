@@ -82,15 +82,16 @@ class ReachHotspotMap extends StatelessWidget {
                     defaultColor: baseColorLight,
                     colors: SMapUgandaColors().toMap(),
                     countryBorder: const CountryBorder(
+                      width: 0.6,
                         color: Colors.white),
                     callback: (id, name, tapdetails) {
                       print(id);
                       print(name);
-
+                  
                       final targetContext =
                           contextAttachKey
                               .currentContext;
-
+                  
                       if (targetContext == null) return;
                       final box = targetContext
                               .findRenderObject()
@@ -102,7 +103,7 @@ class ReachHotspotMap extends StatelessWidget {
                             .context
                             .findRenderObject(),
                       );
-
+                  
                       if (id.isNotEmpty) {
                         contextController.showFlyout(
                             margin: 0,
@@ -142,6 +143,9 @@ class ReachHotspotMap extends StatelessWidget {
       ),
     );
   }
+}
+
+setState(Null Function() param0) {
 }
 
 
