@@ -6,8 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ScreenAppOverlay {
   ScreenAppOverlay._();
 
-  static Future<Object?> showAppDialogWindow(BuildContext context,
-      {required Widget body}) {
+  static Future<Object?> showAppDialogWindow(BuildContext context, {required Widget body}) {
     return fluent.showDialog(
         context: context,
         barrierDismissible: true,
@@ -16,8 +15,7 @@ class ScreenAppOverlay {
           return Dialog(
             backgroundColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
-            insetPadding:
-                EdgeInsets.symmetric(horizontal: 150.w, vertical: 20.h),
+            insetPadding: EdgeInsets.symmetric(horizontal: 150.w, vertical: 20.h),
             child: fluent.Acrylic(
               shadowColor: Colors.black12,
               elevation: 10,

@@ -36,13 +36,8 @@ class CompanyProfileState extends State<CompanyProfile> {
       children: [
         Container(
           margin: EdgeInsets.only(left: 20.w, right: 20.0),
-          padding:
-              EdgeInsets.only(bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(6.r),
-                  bottomRight: Radius.circular(6.r))),
+          padding: EdgeInsets.only(bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.r), bottomRight: Radius.circular(6.r))),
           child: Row(
             children: [
               Column(
@@ -53,8 +48,7 @@ class CompanyProfileState extends State<CompanyProfile> {
                       height: 140.w,
                       width: 140.w,
                       child: OctoImage(
-                        placeholderBuilder: OctoBlurHashFix.placeHolder(
-                            'LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
+                        placeholderBuilder: OctoBlurHashFix.placeHolder('LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
                         errorBuilder: OctoError.icon(color: Colors.red),
                         image: CachedNetworkImageProvider(
                           profileData['company_logo'],
@@ -69,12 +63,9 @@ class CompanyProfileState extends State<CompanyProfile> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  subHeading(
-                      text: '${profileData['company_name']}', fontSize: 35.sp),
+                  subHeading(text: '${profileData['company_name']}', fontSize: 35.sp),
                   10.ph,
-                  paragraphSmall(
-                      text: 'Website: ${profileData['company_website']}',
-                      color: Colors.grey),
+                  paragraphSmall(text: 'Website: ${profileData['company_website']}', color: Colors.grey),
                   20.ph,
                 ],
               )
@@ -95,12 +86,8 @@ class CompanyProfileState extends State<CompanyProfile> {
                   shadowColor: Colors.black26,
                   borderRadius: BorderRadius.circular(6.r),
                   child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: baseColorLight, width: 0.4),
-                        borderRadius: BorderRadius.circular(6.r),
-                        color: Colors.white),
+                    padding: EdgeInsets.only(bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
+                    decoration: BoxDecoration(border: Border.all(color: baseColorLight, width: 0.4), borderRadius: BorderRadius.circular(6.r), color: Colors.white),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -111,29 +98,19 @@ class CompanyProfileState extends State<CompanyProfile> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                subHeading(
-                                    text: 'Company Profile', fontSize: 16.sp),
+                                subHeading(text: 'Company Profile', fontSize: 16.sp),
                                 6.ph,
-                                paragraphSmallItalic(
-                                    text:
-                                        'Manage information about your business.',
-                                    color: Colors.grey),
+                                paragraphSmallItalic(text: 'Manage information about your business.', color: Colors.grey),
                               ],
                             ),
                             fluent.Button(
                               child: label(text: 'Edit Profile'),
                               onPressed: () {
-                                authController.companyDescriptionController
-                                    .text = profileData['company_description'];
-                                authController.emailController.text =
-                                    profileData['company_email'];
-                                authController.companyWebsiteController.text =
-                                    profileData['company_website'];
-                                authController.companyNameController.text =
-                                    profileData['company_name'];
-                                ScreenAppOverlay.showAppDialogWindow(context,
-                                    body: EditCompanyProfile(
-                                        authController: authController));
+                                authController.companyDescriptionController.text = profileData['company_description'];
+                                authController.emailController.text = profileData['company_email'];
+                                authController.companyWebsiteController.text = profileData['company_website'];
+                                authController.companyNameController.text = profileData['company_name'];
+                                ScreenAppOverlay.showAppDialogWindow(context, body: EditCompanyProfile(authController: authController));
                               },
                             )
                           ],
@@ -141,18 +118,14 @@ class CompanyProfileState extends State<CompanyProfile> {
                         20.ph,
                         subHeading(text: 'DESCRIPTION'),
                         10.ph,
-                        paragraphSmall(
-                            text: profileData['company_description'],
-                            color: Colors.grey),
+                        paragraphSmall(text: profileData['company_description'], color: Colors.grey),
                         10.ph,
                         20.ph,
                         subHeading(text: 'CONTACT'),
                         10.ph,
-                        paragraphSmallItalic(
-                            text: 'Email: ${profileData['company_email']}'),
+                        paragraphSmallItalic(text: 'Email: ${profileData['company_email']}'),
                         10.ph,
-                        paragraphSmallItalic(
-                            text: 'Phone: +${profileData['company_phone']}'),
+                        paragraphSmallItalic(text: 'Phone: +${profileData['company_phone']}'),
                         40.ph,
                         AppButton(
                             action: () {
@@ -175,12 +148,8 @@ class CompanyProfileState extends State<CompanyProfile> {
                   shadowColor: Colors.black26,
                   borderRadius: BorderRadius.circular(6.r),
                   child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: baseColorLight, width: 0.4),
-                        borderRadius: BorderRadius.circular(6.r),
-                        color: Colors.white),
+                    padding: EdgeInsets.only(bottom: 20.h, top: 20.h, left: 20.w, right: 20.0),
+                    decoration: BoxDecoration(border: Border.all(color: baseColorLight, width: 0.4), borderRadius: BorderRadius.circular(6.r), color: Colors.white),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -192,13 +161,9 @@ class CompanyProfileState extends State<CompanyProfile> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  subHeading(
-                                      text: 'Team Members', fontSize: 16.sp),
+                                  subHeading(text: 'Team Members', fontSize: 16.sp),
                                   6.ph,
-                                  paragraphSmallItalic(
-                                      text:
-                                          'This is a list of team members you have set up and invited',
-                                      color: Colors.grey),
+                                  paragraphSmallItalic(text: 'This is a list of team members you have set up and invited', color: Colors.grey),
                                 ],
                               ),
                             ),
@@ -212,16 +177,7 @@ class CompanyProfileState extends State<CompanyProfile> {
                         Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(fluent.FluentIcons.blocked2,
-                                  size: 30.w, color: baseColor),
-                              20.ph,
-                              paragraph(
-                                  text:
-                                      'Your collaborating team members will\nappear here',
-                                  color: Colors.black38,
-                                  textAlign: TextAlign.center)
-                            ],
+                            children: [Icon(fluent.FluentIcons.blocked2, size: 30.w, color: baseColor), 20.ph, paragraph(text: 'Your collaborating team members will\nappear here', color: Colors.black38, textAlign: TextAlign.center)],
                           ),
                         ),
                         60.ph,

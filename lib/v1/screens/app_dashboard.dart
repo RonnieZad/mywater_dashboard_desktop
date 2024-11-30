@@ -33,8 +33,7 @@ class DashboardOverviewState extends State<DashboardOverview> {
     return Obx(() {
       return Shortcuts(
         shortcuts: <LogicalKeySet, Intent>{
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyR):
-              const RefreshPageIntent(),
+          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyR): const RefreshPageIntent(),
         },
         child: Actions(
           actions: <Type, Action<Intent>>{
@@ -59,14 +58,9 @@ class DashboardOverviewState extends State<DashboardOverview> {
                               size: 13.w,
                             ),
                           ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15.h, horizontal: 10.w),
-                          placeholder:
-                              'Search anything like campaign id, name, etc.',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 12.sp,
-                              color: Colors.black54),
+                          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                          placeholder: 'Search anything like campaign id, name, etc.',
+                          style: TextStyle(fontFamily: 'Poppins', fontSize: 12.sp, color: Colors.black54),
                           expands: false,
                         ),
                       ),
@@ -74,35 +68,25 @@ class DashboardOverviewState extends State<DashboardOverview> {
                       AppButton(
                         buttonLabel: 'Create Campaign',
                         action: () {
-                          ScreenAppOverlay.showAppDialogWindow(context,
-                              body: const CreateCampaign());
+                          ScreenAppOverlay.showAppDialogWindow(context, body: const CreateCampaign());
                         },
                       ),
                       10.pw,
                       IconButton(
                           onPressed: () {
-                            ScreenOverlay.showToast(context,
-                                title: 'No new notifications',
-                                message: 'There are no notifications',
-                                isWarning: true);
+                            ScreenOverlay.showToast(context, title: 'No new notifications', message: 'There are no notifications', isWarning: true);
                           },
-                          icon: const Icon(fluent.FluentIcons.ringer_active,
-                              size: 28))
+                          icon: const Icon(fluent.FluentIcons.ringer_active, size: 28))
                     ],
                   ),
                   35.ph,
                   Row(
                     children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            headingBig(text: 'Welcome back!'),
-                            6.ph,
-                            paragraphSmallItalic(
-                                text:
-                                    'Here\'s an overview summary of your campaign performance.',
-                                color: Colors.grey),
-                          ]),
+                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        headingBig(text: 'Welcome back!'),
+                        6.ph,
+                        paragraphSmallItalic(text: 'Here\'s an overview summary of your campaign performance.', color: Colors.grey),
+                      ]),
                     ],
                   ),
                   40.ph,
@@ -116,31 +100,19 @@ class DashboardOverviewState extends State<DashboardOverview> {
                                 children: campaignController.campaigns
                                     .map(
                                       (campaign) => StatCard(
-                                        pad: (campaignController.campaigns
-                                                        .indexOf(campaign) ==
-                                                    0 &&
-                                                campaignController
-                                                        .campaigns.length >
-                                                    1)
+                                        pad: (campaignController.campaigns.indexOf(campaign) == 0 && campaignController.campaigns.length > 1)
                                             ? true
-                                            : (campaignController.campaigns
-                                                            .indexOf(campaign) +
-                                                        1 ==
-                                                    campaignController
-                                                        .campaigns.length)
+                                            : (campaignController.campaigns.indexOf(campaign) + 1 == campaignController.campaigns.length)
                                                 ? false
                                                 : true,
                                         advertId: campaign.advertId!,
                                         pictureUrl: campaign.pictureUrl,
                                         iconData: fluent.FluentIcons.home,
                                         capacity: campaign.scanCount!,
-                                        color: campaignPlotColors[
-                                            campaignController.campaigns
-                                                .indexOf(campaign)],
+                                        color: campaignPlotColors[campaignController.campaigns.indexOf(campaign)],
                                         percentage: 98,
                                         title: campaign.promotionText,
-                                        description:
-                                            campaign.promotionDescription,
+                                        description: campaign.promotionDescription,
                                       ),
                                     )
                                     .toList()),
@@ -150,10 +122,7 @@ class DashboardOverviewState extends State<DashboardOverview> {
                                 children: [
                                   const LineChartSeries(),
                                   10.pw,
-                                  ReachHotspotMap(
-                                      contextController: contextController,
-                                      contextAttachKey: contextAttachKey,
-                                      context: context),
+                                  ReachHotspotMap(contextController: contextController, contextAttachKey: contextAttachKey, context: context),
                                 ],
                               ),
                             ),

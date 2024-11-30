@@ -8,22 +8,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
-import 'package:mywater_dashboard_revamp/v1/constants/strings.dart';
-import 'package:mywater_dashboard_revamp/v1/utils/typography.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
 
 class ScreenOverlay {
   ScreenOverlay._();
 
-  static showNyumbaSidePaneDialog(BuildContext context,
-      {required Widget child}) {
+  static showNyumbaSidePaneDialog(BuildContext context, {required Widget child}) {
     return fluent.showDialog(
       barrierDismissible: true,
       context: context,
       builder: (context) {
         return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
           elevation: 10.0,
           alignment: Alignment.centerRight,
           insetAnimationCurve: Curves.slowMiddle,
@@ -39,13 +35,8 @@ class ScreenOverlay {
   /// [Color] which is the background color of the Toast and textColor of type [Color] which is the
   /// color of the text.
   /// This method returns the `showToastWidget` from `package:oktoast` which displays a toast
-  static Future showToast(context,
-      {isError = false,
-      isWarning = false,
-      required String title,
-      required String message}) async {
-    return await fluent.displayInfoBar(context, alignment: Alignment.topRight,
-        builder: (context, close) {
+  static Future showToast(context, {isError = false, isWarning = false, required String title, required String message}) async {
+    return await fluent.displayInfoBar(context, alignment: Alignment.topRight, builder: (context, close) {
       return fluent.InfoBar(
         title: Text(
           title,
@@ -128,11 +119,10 @@ class ScreenOverlay {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     heading(text: headingText, color: Colors.black),
                     20.ph,
-                    child ??
-                        paragraph(text: paragraphText, color: Colors.black),
+                    child ?? paragraph(text: paragraphText, color: Colors.black),
                     30.ph,
                   ],
                 ),
@@ -159,7 +149,7 @@ class ScreenOverlay {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     heading(text: headingText, color: Colors.black),
                     20.ph,
                     paragraph(text: paragraphText, color: Colors.black),
@@ -191,7 +181,7 @@ class ScreenOverlay {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     heading(text: headingText, color: Colors.black),
                     20.ph,
                     child,
@@ -227,7 +217,7 @@ class ScreenOverlay {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         heading(text: headingText, color: Colors.black),
                         10.ph,
                         label(text: paragraphText, color: Colors.black),
@@ -245,10 +235,7 @@ class ScreenOverlay {
                                     borderRadius: BorderRadius.circular(4.r),
                                     color: baseColor,
                                   ),
-                                  child: Center(
-                                      child: buttonLabel(
-                                          text: 'Upload File(s)',
-                                          color: Colors.white)),
+                                  child: Center(child: buttonLabel(text: 'Upload File(s)', color: Colors.white)),
                                 ),
                               ),
                             ),
@@ -294,7 +281,7 @@ class ScreenOverlay {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     heading(text: headingText, color: Colors.black),
                     10.ph,
                     label(text: paragraphText, color: Colors.black),
@@ -328,11 +315,10 @@ class ScreenOverlay {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     heading(text: headingText, color: Colors.black),
                     10.ph,
-                    paragraph(
-                        text: paragraphText, color: Colors.black, maxlines: 4),
+                    paragraph(text: paragraphText, color: Colors.black, maxlines: 4),
                   ],
                 ),
               ),

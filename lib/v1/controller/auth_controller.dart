@@ -49,38 +49,25 @@ class AuthController extends GetxController {
                 padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const fluent.ProgressBar(),
-                    20.ph,
-                    paragraph(text: 'Creating account...')
-                  ],
+                  children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Creating account...')],
                 ),
               ),
             ),
           );
         });
-    ApiService.postRequest(
-            endPoint: '/account_registration',
-            service: Services.authentication,
-            body: authModel.toJson())
-        .then((response) {
+    ApiService.postRequest(endPoint: '/account_registration', service: Services.authentication, body: authModel.toJson()).then((response) {
       print(response);
-      if (response['payload']['status'] >= 200 &&
-          response['payload']['status'] < 300) {
+      if (response['payload']['status'] >= 200 && response['payload']['status'] < 300) {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
         GetStorage().write('partnerData', response['payload']['data']);
         Phoenix.rebirth(context);
         Get.reset();
 
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Dashboard()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Dashboard()));
       } else {
         Navigator.pop(context);
-        ScreenOverlay.showToast(context,
-            title: 'Something went wrong',
-            message: response['payload']['error'],
-            isError: true);
+        ScreenOverlay.showToast(context, title: 'Something went wrong', message: response['payload']['error'], isError: true);
       }
       _clearAuthForm();
     });
@@ -102,38 +89,25 @@ class AuthController extends GetxController {
                 padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const fluent.ProgressBar(),
-                    20.ph,
-                    paragraph(text: 'Logging in...')
-                  ],
+                  children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Logging in...')],
                 ),
               ),
             ),
           );
         });
-    ApiService.postRequest(
-            endPoint: '/account_login',
-            service: Services.authentication,
-            body: authModel.toJson())
-        .then((response) {
+    ApiService.postRequest(endPoint: '/account_login', service: Services.authentication, body: authModel.toJson()).then((response) {
       print(response);
 
-      if (response['payload']['status'] >= 200 &&
-          response['payload']['status'] < 300) {
+      if (response['payload']['status'] >= 200 && response['payload']['status'] < 300) {
         GetStorage().write('token', response['payload']['token']);
         GetStorage().write('partnerId', response['payload']['data']['id']);
         GetStorage().write('partnerData', response['payload']['data']);
         Phoenix.rebirth(context);
         Get.reset();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Dashboard()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Dashboard()));
       } else {
         Navigator.pop(context);
-        ScreenOverlay.showToast(context,
-            title: 'Something went wrong',
-            message: response['payload']['error'],
-            isError: true);
+        ScreenOverlay.showToast(context, title: 'Something went wrong', message: response['payload']['error'], isError: true);
       }
       _clearAuthForm();
     });

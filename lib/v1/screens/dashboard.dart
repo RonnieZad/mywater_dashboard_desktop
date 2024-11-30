@@ -25,8 +25,7 @@ class RefreshPageAction extends Action<RefreshPageIntent> {
   @override
   void invoke(covariant RefreshPageIntent intent) {
     controller.getCampaignMetrics();
-    ScreenOverlay.showToast(context,
-        title: 'Data refreshed', message: 'Showing the most recent records');
+    ScreenOverlay.showToast(context, title: 'Data refreshed', message: 'Showing the most recent records');
   }
 }
 
@@ -74,13 +73,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(fluent.FluentIcons.blocked2, size: 50.w, color: baseColor),
-          20.ph,
-          paragraph(
-              text: 'Your reports and analytics will appear here',
-              color: Colors.black54)
-        ],
+        children: [Icon(fluent.FluentIcons.blocked2, size: 50.w, color: baseColor), 20.ph, paragraph(text: 'Your reports and analytics will appear here', color: Colors.black54)],
       ),
     ),
     fluent.PaneItem(
@@ -105,11 +98,8 @@ class _DashboardState extends State<Dashboard> {
       child: fluent.NavigationView(
         appBar: const fluent.NavigationAppBar(leading: SizedBox.shrink()),
         pane: fluent.NavigationPane(
-          displayMode: isPaneOpen
-              ? fluent.PaneDisplayMode.compact
-              : fluent.PaneDisplayMode.open,
-          size: const fluent.NavigationPaneSize(
-              openMinWidth: 100, openMaxWidth: 220),
+          displayMode: isPaneOpen ? fluent.PaneDisplayMode.compact : fluent.PaneDisplayMode.open,
+          size: const fluent.NavigationPaneSize(openMinWidth: 100, openMaxWidth: 220),
           menuButton: fluent.Padding(
             padding: const EdgeInsets.only(bottom: 90.0),
             child: IconButton(
@@ -149,8 +139,7 @@ class _DashboardState extends State<Dashboard> {
                     builder: (context) {
                       return fluent.ContentDialog(
                         title: heading(text: 'Log out'),
-                        content: paragraph(
-                            text: 'Are you sure you want to log out?'),
+                        content: paragraph(text: 'Are you sure you want to log out?'),
                         actions: [
                           fluent.Button(
                             onPressed: () {

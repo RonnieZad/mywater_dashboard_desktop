@@ -35,25 +35,13 @@ class _CreateCampaignState extends State<CreateCampaign> {
           children: [
             heading(text: 'Create New Ad Campaign', color: baseColor),
             10.ph,
-            paragraph(
-                text: 'Submit campaign artwork to MyWater to create an ad',
-                color: Colors.black54),
+            paragraph(text: 'Submit campaign artwork to MyWater to create an ad', color: Colors.black54),
             30.ph,
             if (campaignController.artworkFile.value!.files.isNotEmpty) ...[
               Row(
                 children: [
                   Expanded(
-                    child: kIsWeb
-                        ? Image.memory(
-                            campaignController
-                                .artworkFile.value!.files.first.bytes!,
-                            height: 280.h,
-                            fit: BoxFit.cover)
-                        : Image.file(
-                            File(campaignController
-                                .artworkFile.value!.files.first.path!),
-                            height: 280.h,
-                            fit: BoxFit.cover),
+                    child: kIsWeb ? Image.memory(campaignController.artworkFile.value!.files.first.bytes!, height: 280.h, fit: BoxFit.cover) : Image.file(File(campaignController.artworkFile.value!.files.first.path!), height: 280.h, fit: BoxFit.cover),
                   ),
                 ],
               ),
@@ -69,8 +57,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                   fontSize: 11.sp,
                 )),
                 onPressed: () async {
-                  campaignController.artworkFile.value =
-                      await FilePicker.platform.pickFiles();
+                  campaignController.artworkFile.value = await FilePicker.platform.pickFiles();
                   setState(() {});
                 },
               ),
@@ -91,10 +78,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
                 controller: campaignController.campaignTitleController,
                 placeholder: 'eg App download Promotion',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.black54),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
                 expands: false,
               ),
             ),
@@ -114,10 +98,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
                 controller: campaignController.campaignDescriptionController,
                 placeholder: 'eg Get 10% off on your first purchase',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.black54),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
                 expands: false,
               ),
             ),
@@ -137,10 +118,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
                 controller: campaignController.campaignPublicUrlController,
                 placeholder: 'eg www.publicUrlGoesHere.com',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.black54),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
                 expands: false,
               ),
             ),
@@ -158,13 +136,9 @@ class _CreateCampaignState extends State<CreateCampaign> {
                   ),
                 ),
                 padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
-                controller:
-                    campaignController.campaignSurveyQuestionOneController,
+                controller: campaignController.campaignSurveyQuestionOneController,
                 placeholder: 'optional',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 11.sp,
-                    color: Colors.black54),
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
                 expands: false,
               ),
             ),
@@ -173,21 +147,17 @@ class _CreateCampaignState extends State<CreateCampaign> {
               children: [
                 fluent.DatePicker(
                   header: 'Campaign Start Date',
-                  headerStyle:
-                      TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+                  headerStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
                   startDate: DateTime.now(),
                   selected: campaignController.campaignStartDate,
-                  onChanged: (time) => setState(
-                      () => campaignController.campaignStartDate = time),
+                  onChanged: (time) => setState(() => campaignController.campaignStartDate = time),
                 ),
                 const Spacer(),
                 fluent.DatePicker(
                   header: 'Campaign End Date',
-                  headerStyle:
-                      TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+                  headerStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
                   selected: campaignController.campaignEndDate,
-                  onChanged: (time) =>
-                      setState(() => campaignController.campaignEndDate = time),
+                  onChanged: (time) => setState(() => campaignController.campaignEndDate = time),
                 ),
               ],
             ),
@@ -208,68 +178,36 @@ class _CreateCampaignState extends State<CreateCampaign> {
                         print('we are');
                         String? uploadedImageUrl;
 
-                        if (campaignController
-                            .artworkFile.value!.files.isNotEmpty) {
-                          for (PlatformFile file
-                              in campaignController.artworkFile.value!.files) {
+                        if (campaignController.artworkFile.value!.files.isNotEmpty) {
+                          for (PlatformFile file in campaignController.artworkFile.value!.files) {
                             if (!kIsWeb) {
                               File pickedFile = File(file.path!);
 
-                              final List<int> imageBytes =
-                                  await pickedFile.readAsBytes();
-                              uploadedImageUrl = await uploadImageToImageKit(
-                                  context,
-                                  imageBytes,
-                                  'myWaterCampaignArtwork');
+                              final List<int> imageBytes = await pickedFile.readAsBytes();
+                              uploadedImageUrl = await uploadImageToImageKit(context, imageBytes, 'myWaterCampaignArtwork');
                             } else {
                               Uint8List? pickedFile = file.bytes;
 
-                              uploadedImageUrl = await uploadImageToImageKit(
-                                  context,
-                                  pickedFile!.toList(),
-                                  'myWaterCampaignArtwork');
+                              uploadedImageUrl = await uploadImageToImageKit(context, pickedFile!.toList(), 'myWaterCampaignArtwork');
                             }
                           }
                         }
 
-                        if (campaignController.artworkFile == null) {
-                          ScreenOverlay.showToast(context,
-                              title: 'Missing Field',
-                              message: 'Attach artwork',
-                              isWarning: true);
-                        } else if (campaignController
-                            .campaignTitleController.text.isEmpty) {
-                          ScreenOverlay.showToast(context,
-                              title: 'Missing Field',
-                              message: 'Fill in title',
-                              isWarning: true);
-                        } else if (campaignController
-                            .campaignDescriptionController.text.isEmpty) {
-                          ScreenOverlay.showToast(context,
-                              title: 'Missing Field',
-                              message: 'Fill in description',
-                              isWarning: true);
-                        } else if (campaignController
-                            .campaignPublicUrlController.text.isEmpty) {
-                          ScreenOverlay.showToast(context,
-                              title: 'Missing Field',
-                              message: 'Fill in public url',
-                              isWarning: true);
+                        if (campaignController.campaignTitleController.text.isEmpty) {
+                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in title', isWarning: true);
+                        } else if (campaignController.campaignDescriptionController.text.isEmpty) {
+                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in description', isWarning: true);
+                        } else if (campaignController.campaignPublicUrlController.text.isEmpty) {
+                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in public url', isWarning: true);
                         } else {
                           CampaignModel campaignModel = CampaignModel(
                             advertiserId: GetStorage().read('partnerId'),
-                            promotionText:
-                                campaignController.campaignTitleController.text,
-                            promotionDescription: campaignController
-                                .campaignDescriptionController.text,
-                            promotionPublicUrl: campaignController
-                                .campaignPublicUrlController.text,
+                            promotionText: campaignController.campaignTitleController.text,
+                            promotionDescription: campaignController.campaignDescriptionController.text,
+                            promotionPublicUrl: campaignController.campaignPublicUrlController.text,
                             pictureUrl: uploadedImageUrl!,
                           );
-                          campaignController
-                              .createCampaign(context,
-                                  campaignModel: campaignModel)
-                              .then((callback) {
+                          campaignController.createCampaign(context, campaignModel: campaignModel).then((callback) {
                             Navigator.pop(context);
                           });
                         }

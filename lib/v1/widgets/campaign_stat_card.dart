@@ -63,34 +63,28 @@ class StatCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 5.w),
+                            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.r),
-                              border: Border.all(
-                                  color: baseColorLight, width: 0.5),
+                              border: Border.all(color: baseColorLight, width: 0.5),
                             ),
                             child: paragraph(text: 'Active'),
                           ),
                           2.pw,
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 5.w),
+                            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.r),
-                              border: Border.all(
-                                  color: baseColorLight, width: 0.5),
+                              border: Border.all(color: baseColorLight, width: 0.5),
                             ),
                             child: paragraph(text: '$capacity Scans'),
                           ),
                           2.pw,
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 5.w),
+                            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.r),
-                              border: Border.all(
-                                  color: baseColorLight, width: 0.5),
+                              border: Border.all(color: baseColorLight, width: 0.5),
                             ),
                             child: paragraph(text: '2024-01-31 06:03'),
                           ),
@@ -98,20 +92,12 @@ class StatCard extends StatelessWidget {
                       ),
                       20.ph,
                       Row(mainAxisSize: MainAxisSize.min, children: [
-                        paragraph(
-                            text:
-                                'https://app.mywater.agency/?code=$advertId',
-                            fontSize: 9.sp,
-                            color: baseColor),
+                        paragraph(text: 'https://app.mywater.agency/?code=$advertId', fontSize: 9.sp, color: baseColor),
                         10.pw,
                         fluent.Button(
                           onPressed: () {
-                            Clipboard.setData(ClipboardData(
-                                text:
-                                    'https://app.mywater.agency/?code=$advertId'));
-                            ScreenOverlay.showToast(context,
-                                title: 'Successful',
-                                message: 'Link copied to clipboard');
+                            Clipboard.setData(ClipboardData(text: 'https://app.mywater.agency/?code=$advertId'));
+                            ScreenOverlay.showToast(context, title: 'Successful', message: 'Link copied to clipboard');
                           },
                           child: fluent.Row(
                             children: [
@@ -128,16 +114,7 @@ class StatCard extends StatelessWidget {
                       ]),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.r),
-                        child: QrImageView(
-                            gapless: false,
-                            dataModuleStyle: const QrDataModuleStyle(
-                                dataModuleShape: QrDataModuleShape.circle),
-                            eyeStyle: const QrEyeStyle(
-                                eyeShape: QrEyeShape.circle),
-                            foregroundColor: baseColor,
-                            data:
-                                'https://app.mywater.agency/?code=$advertId',
-                            size: 140.w),
+                        child: QrImageView(gapless: false, dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle), eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.circle), foregroundColor: baseColor, data: 'https://app.mywater.agency/?code=$advertId', size: 140.w),
                       ),
                       20.ph,
                       ClipRRect(
@@ -146,8 +123,7 @@ class StatCard extends StatelessWidget {
                           width: 600.w,
                           height: 400.h,
                           child: OctoImage(
-                            placeholderBuilder: OctoBlurHashFix.placeHolder(
-                                'LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
+                            placeholderBuilder: OctoBlurHashFix.placeHolder('LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
                             errorBuilder: OctoError.icon(color: Colors.red),
                             image: CachedNetworkImageProvider(
                               pictureUrl,
@@ -165,9 +141,7 @@ class StatCard extends StatelessWidget {
                                 height: 45.h,
                                 child: fluent.FilledButton(
                                     style: fluent.ButtonStyle(
-                                      backgroundColor:
-                                          fluent.ButtonState.all(
-                                              Colors.black),
+                                      backgroundColor: fluent.ButtonState.all(Colors.black),
                                     ),
                                     child: fluent.Center(
                                         child: label(
@@ -208,10 +182,7 @@ class StatCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(6.r),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
-              decoration: BoxDecoration(
-                  border: Border.all(color: baseColorLight, width: 0.4),
-                  borderRadius: BorderRadius.circular(6.r),
-                  color: Colors.white),
+              decoration: BoxDecoration(border: Border.all(color: baseColorLight, width: 0.4), borderRadius: BorderRadius.circular(6.r), color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -227,17 +198,13 @@ class StatCard extends StatelessWidget {
                       Expanded(
                         child: Container(
                           height: 5.h,
-                          decoration: BoxDecoration(
-                              color: baseColorLight,
-                              borderRadius: BorderRadius.circular(5.r)),
+                          decoration: BoxDecoration(color: baseColorLight, borderRadius: BorderRadius.circular(5.r)),
                           child: Row(
                             children: [
                               Expanded(
                                 flex: percentage,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      color: color,
-                                      borderRadius: BorderRadius.circular(5.r)),
+                                  decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(5.r)),
                                 ),
                               ),
                               Expanded(
@@ -256,8 +223,7 @@ class StatCard extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2.r),
                           border: Border.all(color: baseColorLight, width: 0.5),
@@ -266,8 +232,7 @@ class StatCard extends StatelessWidget {
                       ),
                       2.pw,
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5.h, horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2.r),
                           border: Border.all(color: baseColorLight, width: 0.5),

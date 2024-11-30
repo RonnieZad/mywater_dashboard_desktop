@@ -7,7 +7,7 @@ import 'package:mywater_dashboard_revamp/v1/controller/campaign_controller.dart'
 import 'package:mywater_dashboard_revamp/v1/utils/typography.dart';
 
 class _LineChart extends StatefulWidget {
-  _LineChart({required this.isShowingMainData});
+  const _LineChart({required this.isShowingMainData});
 
   final bool isShowingMainData;
 
@@ -38,12 +38,7 @@ class _LineChartState extends State<_LineChart> {
     }
   }
 
-  List<String> getBottomTitles = [
-    '0-4 hrs',
-    '4-8 hrs',
-    '8-12 hrs',
-    '12-24 hrs'
-  ]; // Adjust according to the number of intervals
+  List<String> getBottomTitles = ['0-4 hrs', '4-8 hrs', '8-12 hrs', '12-24 hrs']; // Adjust according to the number of intervals
 
   selectedDurationInterval(frequencyValue) {
     totalImpressions = 0;
@@ -55,10 +50,7 @@ class _LineChartState extends State<_LineChart> {
           Map<String, dynamic> dailyMetrics = metric.dailyMetrics.toJson();
           List values = dailyMetrics.values.toList();
 
-          totalImpressions += values.fold(
-              0,
-              (previousValue, element) =>
-                  previousValue + int.parse(element.toString()));
+          totalImpressions += values.fold(0, (previousValue, element) => previousValue + int.parse(element.toString()));
 
           spots.addAll(values.asMap().entries.map((entry) {
             return FlSpot(entry.key.toDouble(), entry.value.toDouble());
@@ -72,7 +64,7 @@ class _LineChartState extends State<_LineChart> {
     setState(() {});
   }
 
-  List<LineChartBarData>? lineData;
+  late List<LineChartBarData> lineData;
   List<List<FlSpot>> spotsList = [];
 
   @override
@@ -82,10 +74,7 @@ class _LineChartState extends State<_LineChart> {
 
     for (var metric in campaignController.getCampaignMetricsData) {
       List values = metric.dailyMetrics.toJson().values.toList();
-      totalImpressions += values.fold(
-          0,
-          (previousValue, element) =>
-              previousValue + int.parse(element.toString()));
+      totalImpressions += values.fold(0, (previousValue, element) => previousValue + int.parse(element.toString()));
       spotsList.add(values.asMap().entries.map((entry) {
         return FlSpot(entry.key.toDouble(), entry.value.toDouble());
       }).toList());
@@ -101,7 +90,7 @@ class _LineChartState extends State<_LineChart> {
         color: campaignPlotColors[index],
         barWidth: 4,
         isStrokeCapRound: false,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
         spots: spots,
       );
@@ -124,10 +113,10 @@ class _LineChartState extends State<_LineChart> {
                   }),
                 ),
               ),
-              rightTitles: AxisTitles(
+              rightTitles: const AxisTitles(
                 sideTitles: SideTitles(showTitles: false),
               ),
-              topTitles: AxisTitles(
+              topTitles: const AxisTitles(
                 sideTitles: SideTitles(showTitles: false),
               ),
               leftTitles: AxisTitles(
@@ -138,7 +127,7 @@ class _LineChartState extends State<_LineChart> {
             lineBarsData: lineData,
             minX: 0,
             maxX: 3,
-            maxY: totalImpressions.toDouble() ,
+            maxY: totalImpressions.toDouble(),
             minY: 0,
           ),
         ),
@@ -185,7 +174,6 @@ class _LineChartState extends State<_LineChart> {
     );
     // String text;
     return Text(value.toInt().toString(), style: style, textAlign: TextAlign.center);
-  
 
     // return Text(text, style: style, textAlign: TextAlign.center);
   }
@@ -197,7 +185,7 @@ class _LineChartState extends State<_LineChart> {
         // reservedSize: 40,
       );
 
-  FlGridData get gridData => FlGridData(show: false);
+  FlGridData get gridData => const FlGridData(show: false);
 
   FlBorderData get borderData => FlBorderData(
         show: true,

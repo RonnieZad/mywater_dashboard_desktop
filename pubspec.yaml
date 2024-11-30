@@ -42,7 +42,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_acrylic: ^1.1.3
   flutter_svg: ^2.0.9
-  fl_chart: ^0.62.0
+  fl_chart: ^0.68.0
   countries_world_map: ^1.1.1
   qr_flutter: ^4.0.0
   http: ^1.1.0

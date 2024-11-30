@@ -1,5 +1,3 @@
-
-
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,58 +20,40 @@ class EditCompanyProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: 500.w,
-        child: ListView(
-            padding: EdgeInsets.all(18.w),
-            shrinkWrap: true,
-            children: [
-              heading(
-                  text: 'Edit Company profile',
-                  color: baseColor),
-              10.ph,
-              paragraph(
-                  text:
-                      'Make changes to your public profile',
-                  color: Colors.black54),
-              30.ph,
-              AppTextBox(
-                title: 'Company name',
-                textEditingController:
-                    authController
-                        .companyNameController,
-                hintText: '',
-                icon: fluent.FluentIcons.edit,
-              ),
-              20.ph,
-              AppTextBox(
-                title: 'Description',
-                textEditingController:
-                    authController
-                        .companyDescriptionController,
-                hintText: '',
-                icon: fluent.FluentIcons.edit,
-              ),
-              20.ph,
-              AppTextBox(
-                title: 'Email Address',
-                textEditingController:
-                    authController
-                        .emailController,
-                hintText: '',
-                icon: fluent.FluentIcons.edit,
-              ),
-              20.ph,
-              AppTextBox(
-                title: 'Website',
-                textEditingController:
-                    authController
-                        .companyWebsiteController,
-                hintText: '',
-                icon: fluent.FluentIcons.edit,
-              ),
-              30.ph,
-              AppButton(
-                  action: () {},
-                  buttonLabel: 'Save changes')
-            ]));
+        child: ListView(padding: EdgeInsets.all(18.w), shrinkWrap: true, children: [
+          heading(text: 'Edit Company profile', color: baseColor),
+          10.ph,
+          paragraph(text: 'Make changes to your public profile', color: Colors.black54),
+          30.ph,
+          AppTextBox(
+            title: 'Company name',
+            textEditingController: authController.companyNameController,
+            hintText: '',
+            icon: fluent.FluentIcons.edit,
+          ),
+          20.ph,
+          AppTextBox(
+            title: 'Description',
+            textEditingController: authController.companyDescriptionController,
+            hintText: '',
+            icon: fluent.FluentIcons.edit,
+          ),
+          20.ph,
+          AppTextBox(
+            title: 'Email Address',
+            textEditingController: authController.emailController,
+            hintText: '',
+            icon: fluent.FluentIcons.edit,
+          ),
+          20.ph,
+          AppTextBox(
+            title: 'Website',
+            textEditingController: authController.companyWebsiteController,
+            hintText: '',
+            icon: fluent.FluentIcons.edit,
+          ),
+          30.ph,
+          AppButton(action: () {}, buttonLabel: 'Save changes')
+        ]));
   }
 }

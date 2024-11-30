@@ -30,17 +30,13 @@ class SettingsState extends State<Settings> {
         children: [
           headingBig(text: 'Settings'),
           6.ph,
-          paragraphSmallItalic(
-              text:
-                  '',
-              color: Colors.grey),
+          paragraphSmallItalic(text: '', color: Colors.grey),
           60.ph,
           SizedBox(
             height: 200.w,
             width: 200.w,
             child: OctoImage(
-              placeholderBuilder:
-                  OctoBlurHashFix.placeHolder('LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
+              placeholderBuilder: OctoBlurHashFix.placeHolder('LEHV6nWB2yk8pyo0adR*.7kCMdnj'),
               errorBuilder: OctoError.icon(color: Colors.red),
               image: CachedNetworkImageProvider(
                 profileData['company_logo'],
@@ -51,8 +47,7 @@ class SettingsState extends State<Settings> {
           20.ph,
           subHeading(text: '${profileData['company_name']}'),
           10.ph,
-          paragraphSmall(
-              text: profileData['company_description'], color: Colors.grey),
+          paragraphSmall(text: profileData['company_description'], color: Colors.grey),
           20.ph,
           subHeading(text: 'Contact Information'),
           10.ph,

@@ -11,8 +11,7 @@ import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
 
-Future<String?> uploadImageToImageKit(
-    context, List<int> imageBytes, String fileName) async {
+Future<String?> uploadImageToImageKit(context, List<int> imageBytes, String fileName) async {
   fluent.showDialog(
       context: context,
       dismissWithEsc: false,
@@ -27,11 +26,7 @@ Future<String?> uploadImageToImageKit(
               padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  const fluent.ProgressBar(),
-                  20.ph,
-                  paragraph(text: 'Loading...')
-                ],
+                children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Loading...')],
               ),
             ),
           ),
@@ -39,8 +34,7 @@ Future<String?> uploadImageToImageKit(
       });
   const String publicKey = 'public_CeoHvONj49GaXrgW7OmnViLIaKA=';
   const String privateKey = 'private_OKmciyIxtaflD94CjTWJc76vo9Q=';
-  const String uploadEndpoint =
-      'https://upload.imagekit.io/api/v1/files/upload';
+  const String uploadEndpoint = 'https://upload.imagekit.io/api/v1/files/upload';
 
   final Uri uri = Uri.parse(uploadEndpoint);
 
@@ -56,8 +50,7 @@ Future<String?> uploadImageToImageKit(
   request.files.add(multipartFile);
 
   final DateTime now = DateTime.now();
-  final int expire =
-      now.add(const Duration(minutes: 50)).millisecondsSinceEpoch ~/ 1000;
+  final int expire = now.add(const Duration(minutes: 50)).millisecondsSinceEpoch ~/ 1000;
   final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
   final String signature = generateSignature(
     privateKey,
@@ -88,8 +81,7 @@ Future<String?> uploadImageToImageKit(
 
     return jsonDecode(responseBody)['url'];
   } else {
-    ScreenOverlay.showToast(context,
-        title: 'Failed', message: 'Failed to attach image', isError: true);
+    ScreenOverlay.showToast(context, title: 'Failed', message: 'Failed to attach image', isError: true);
     print('Error uploading image. Status code: ${response.statusCode}');
     print('Response: $responseBody');
 
@@ -134,8 +126,7 @@ class MediaPicker {
   }) async {
     List<String> uploadedImageUrls = [];
     // ScreenOverlay.showLoaderOverlay(duration: 20);
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: pickManyFiles);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: pickManyFiles);
 
     if (result != null) {
       for (PlatformFile file in result.files) {
@@ -144,8 +135,7 @@ class MediaPicker {
           File pickedFile = File(file.path!);
 
           final List<int> imageBytes = await pickedFile.readAsBytes();
-          uploadedImageUrl =
-              await uploadImageToImageKit(context, imageBytes, folderName!);
+          uploadedImageUrl = await uploadImageToImageKit(context, imageBytes, folderName!);
         } else {
           // File pickedFile = File(file.bytes!);
           final imageBytes = file.bytes;

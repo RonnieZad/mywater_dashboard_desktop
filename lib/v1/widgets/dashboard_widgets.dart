@@ -1,4 +1,3 @@
-
 import 'package:countries_world_map/countries_world_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,21 +21,14 @@ class LineChartSeries extends StatelessWidget {
         borderRadius: BorderRadius.circular(6.r),
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(
-              vertical: 20.h, horizontal: 15.w),
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: baseColorLight, width: 0.4),
-              borderRadius: BorderRadius.circular(6.r),
-              color: Colors.white),
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
+          decoration: BoxDecoration(border: Border.all(color: baseColorLight, width: 0.4), borderRadius: BorderRadius.circular(6.r), color: Colors.white),
           child: const LineChartSample1(),
         ),
       ),
     );
   }
 }
-
-
 
 class ReachHotspotMap extends StatelessWidget {
   const ReachHotspotMap({
@@ -59,16 +51,10 @@ class ReachHotspotMap extends StatelessWidget {
         borderRadius: BorderRadius.circular(6.r),
         child: Container(
           width: 460,
-          padding: EdgeInsets.symmetric(
-              vertical: 20.h, horizontal: 15.w),
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: baseColorLight, width: 0.4),
-              borderRadius: BorderRadius.circular(6.r),
-              color: Colors.white),
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 15.w),
+          decoration: BoxDecoration(border: Border.all(color: baseColorLight, width: 0.4), borderRadius: BorderRadius.circular(6.r), color: Colors.white),
           child: Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               headingBig(text: 'Reach Hotspots'),
               20.ph,
@@ -77,57 +63,37 @@ class ReachHotspotMap extends StatelessWidget {
                   controller: contextController,
                   child: SimpleMap(
                     key: contextAttachKey,
-                    instructions:
-                        SMapUganda.instructions,
+                    instructions: SMapUganda.instructions,
                     defaultColor: baseColorLight,
                     colors: SMapUgandaColors().toMap(),
-                    countryBorder: const CountryBorder(
-                      width: 0.6,
-                        color: Colors.white),
+                    countryBorder: const CountryBorder(width: 0.6, color: Colors.white),
                     callback: (id, name, tapdetails) {
                       print(id);
                       print(name);
-                  
-                      final targetContext =
-                          contextAttachKey
-                              .currentContext;
-                  
+
+                      final targetContext = contextAttachKey.currentContext;
+
                       if (targetContext == null) return;
-                      final box = targetContext
-                              .findRenderObject()
-                          as RenderBox;
-                      final position =
-                          box.localToGlobal(
+                      final box = targetContext.findRenderObject() as RenderBox;
+                      final position = box.localToGlobal(
                         tapdetails.localPosition,
-                        ancestor: Navigator.of(context)
-                            .context
-                            .findRenderObject(),
+                        ancestor: Navigator.of(context).context.findRenderObject(),
                       );
-                  
+
                       if (id.isNotEmpty) {
                         contextController.showFlyout(
                             margin: 0,
                             additionalOffset: 0,
-                            dismissOnPointerMoveAway:
-                                true,
-                            barrierColor: Colors.black
-                                .withOpacity(0.1),
+                            dismissOnPointerMoveAway: true,
+                            barrierColor: Colors.black.withOpacity(0.1),
                             position: position,
                             builder: (context) {
-                              return fluent
-                                  .FlyoutContent(
+                              return fluent.FlyoutContent(
                                 child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    paragraph(
-                                        text: name,
-                                        color: Colors
-                                            .black,
-                                        fontSize: 8.sp),
+                                    paragraph(text: name, color: Colors.black, fontSize: 8.sp),
                                   ],
                                 ),
                               );
@@ -145,7 +111,4 @@ class ReachHotspotMap extends StatelessWidget {
   }
 }
 
-setState(Null Function() param0) {
-}
-
-
+setState(Null Function() param0) {}
