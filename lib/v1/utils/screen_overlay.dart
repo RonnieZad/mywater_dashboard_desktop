@@ -3,10 +3,8 @@
 //  Created by Ronald Zad Muhanguzi .
 //  2022, Zofi Cash App. All rights reserved.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
+import 'package:flutter/material.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
 
@@ -38,13 +36,11 @@ class ScreenOverlay {
   static Future showToast(context, {isError = false, isWarning = false, required String title, required String message}) async {
     return await fluent.displayInfoBar(context, alignment: Alignment.topRight, builder: (context, close) {
       return fluent.InfoBar(
-        title: Text(
-          title,
-          style: TextStyle(fontFamily: 'Poppins', fontSize: 12.sp),
+        title: AppTypography.titleMedium(
+          text: title,
         ),
-        content: Text(
-          message,
-          style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp),
+        content: AppTypography.bodyMedium(
+          text: message,
         ),
         action: IconButton(
           icon: const Icon(fluent.FluentIcons.clear),
@@ -63,8 +59,8 @@ class ScreenOverlay {
   // static showLoaderOverlay({int? duration}) {
   //   IgnorePointer loaderOverlay = IgnorePointer(
   //     child: SizedBox(
-  //       width: 80.w,
-  //       height: 80.w,
+  //       width: 80,
+  //       height: 80,
   //       child: ClipRRect(
   //         borderRadius: BorderRadius.circular(12.r),
   //         child: Container(
@@ -74,10 +70,10 @@ class ScreenOverlay {
   //           ),
   //           child: Center(
   //             child: SizedBox(
-  //               width: 30.w,
-  //               height: 30.w,
+  //               width: 30,
+  //               height: 30,
   //               child: CircularProgressIndicator(
-  //                 strokeWidth: 4.w,
+  //                 strokeWidth: 4,
   //                 valueColor: const AlwaysStoppedAnimation(
   //                   Colors.white,
   //                 ),
@@ -113,16 +109,16 @@ class ScreenOverlay {
         builder: (context) {
           return Dialog(
             child: SizedBox(
-              width: 320.w,
+              width: 320,
               child: Padding(
-                padding: EdgeInsets.all(12.w),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    heading(text: headingText, color: Colors.black),
+                    AppTypography.titleMedium(text: headingText, color: Colors.black),
                     20.ph,
-                    child ?? paragraph(text: paragraphText, color: Colors.black),
+                    child ?? AppTypography.bodySmall(text: paragraphText, color: Colors.black),
                     30.ph,
                   ],
                 ),
@@ -143,16 +139,16 @@ class ScreenOverlay {
         builder: (context) {
           return Dialog(
             child: SizedBox(
-              width: 720.w,
+              width: 720,
               child: Padding(
-                padding: EdgeInsets.all(20.w),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    heading(text: headingText, color: Colors.black),
+                    AppTypography.titleMedium(text: headingText, color: Colors.black),
                     20.ph,
-                    paragraph(text: paragraphText, color: Colors.black),
+                    AppTypography.titleSmall(text: paragraphText, color: Colors.black),
                     20.ph,
                     Expanded(child: child),
                   ],
@@ -175,14 +171,14 @@ class ScreenOverlay {
           return Dialog(
             insetPadding: EdgeInsets.zero,
             child: SizedBox(
-              width: 320.w,
+              width: 320,
               child: Padding(
-                padding: EdgeInsets.all(12.w),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    heading(text: headingText, color: Colors.black),
+                    AppTypography.titleMedium(text: headingText, color: Colors.black),
                     20.ph,
                     child,
                     30.ph,
@@ -208,19 +204,19 @@ class ScreenOverlay {
           return Dialog(
             insetPadding: EdgeInsets.zero,
             child: SizedBox(
-              width: 460.w,
-              height: 460.h,
+              width: 460,
+              height: 460,
               child: Padding(
-                padding: EdgeInsets.all(12.w),
+                padding: const EdgeInsets.all(12),
                 child: Stack(
                   children: [
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        heading(text: headingText, color: Colors.black),
+                        AppTypography.titleMedium(text: headingText, color: Colors.black),
                         10.ph,
-                        label(text: paragraphText, color: Colors.black),
+                        AppTypography.titleSmall(text: paragraphText, color: Colors.black),
                         25.ph,
                         Expanded(child: Center(child: child)),
                         20.ph,
@@ -230,12 +226,12 @@ class ScreenOverlay {
                               child: GestureDetector(
                                 onTap: action,
                                 child: Container(
-                                  height: 50.h,
+                                  height: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4.r),
+                                    borderRadius: BorderRadius.circular(4),
                                     color: baseColor,
                                   ),
-                                  child: Center(child: buttonLabel(text: 'Upload File(s)', color: Colors.white)),
+                                  child: Center(child: AppTypography.labelMedium(text: 'Upload File(s)', color: Colors.white)),
                                 ),
                               ),
                             ),
@@ -275,16 +271,16 @@ class ScreenOverlay {
           return Dialog(
             insetPadding: EdgeInsets.zero,
             child: SizedBox(
-              width: 320.w,
+              width: 320,
               child: Padding(
-                padding: EdgeInsets.all(12.w),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    heading(text: headingText, color: Colors.black),
+                    AppTypography.titleMedium(text: headingText, color: Colors.black),
                     10.ph,
-                    label(text: paragraphText, color: Colors.black),
+                    AppTypography.titleSmall(text: paragraphText, color: Colors.black),
                     25.ph,
                     child,
                   ],
@@ -309,16 +305,16 @@ class ScreenOverlay {
         builder: (context) {
           return Dialog(
             child: SizedBox(
-              width: 320.w,
+              width: 320,
               child: Padding(
-                padding: EdgeInsets.all(12.w),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    heading(text: headingText, color: Colors.black),
+                    AppTypography.titleMedium(text: headingText, color: Colors.black),
                     10.ph,
-                    paragraph(text: paragraphText, color: Colors.black, maxlines: 4),
+                    AppTypography.titleSmall(text: paragraphText, color: Colors.black),
                   ],
                 ),
               ),

@@ -4,7 +4,7 @@
 //  2023, Enyumba App. All rights reserved.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:intl/intl.dart';
 
 extension ImagePath on String {
@@ -16,8 +16,8 @@ extension ImagePath on String {
 }
 
 extension EmptyPadding on num {
-  SizedBox get ph => SizedBox(height: toDouble().h);
-  SizedBox get pw => SizedBox(width: toDouble().w);
+  SizedBox get ph => SizedBox(height: toDouble());
+  SizedBox get pw => SizedBox(width: toDouble());
 }
 
 extension FormatAmount on int {

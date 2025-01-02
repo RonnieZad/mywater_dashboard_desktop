@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/typography.dart';
 
 class AppButton extends StatelessWidget {
@@ -14,14 +13,13 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 45.h,
+        height: 45,
         child: FilledButton(
             onPressed: action,
             child: Center(
-                child: label(
+                child: AppTypography.bodyMedium(
               text: buttonLabel,
               color: Colors.white,
-              fontSize: 10.sp,
             ))));
   }
 }

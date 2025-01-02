@@ -4,107 +4,106 @@
 //  2022, Zofi Cash App. All rights reserved.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// #####  TextStyle for home page title
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `30.sp` from the `package:flutter_screenutil`, font weight to `600` and text color to `white70` to add a glass effect
-TextStyle homePageTextStyle = TextStyle(
+/// `30` from the `package:flutter_screenutil`, font weight to `600` and text color to `white70` to add a glass effect
+TextStyle homePageTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
   fontWeight: FontWeight.w600,
-  fontSize: 30.sp,
+  fontSize: 30,
   color: Colors.white70,
 );
 
 /// #####  TextStyle for home page amount figure
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `60.sp` from the `package:flutter_screenutil`, font weight to `800` and text color to `white70` to add a glass effect
-TextStyle amountTextStyle = TextStyle(
+/// `60` from the `package:flutter_screenutil`, font weight to `800` and text color to `white70` to add a glass effect
+TextStyle amountTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
   fontWeight: FontWeight.w800,
-  fontSize: 60.sp,
+  fontSize: 60,
   color: Colors.white,
 );
 
 /// #####  TextStyle for home page currency text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `18.sp` from the `package:flutter_screenutil`, font weight to `600` and text color to `white38` to add a glass effect
-TextStyle currencyTextStyle = TextStyle(
+/// `18` from the `package:flutter_screenutil`, font weight to `600` and text color to `white38` to add a glass effect
+TextStyle currencyTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
   fontWeight: FontWeight.w600,
-  fontSize: 18.sp,
+  fontSize: 18,
   color: Colors.white38,
 );
 
 /// #####  TextStyle for home page amount buttons
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `26.sp` from the `package:flutter_screenutil`, font weight to `800` and text color to `white54` to add a glass effect
-TextStyle amountInputButtonTextStyle = TextStyle(
+/// `26` from the `package:flutter_screenutil`, font weight to `800` and text color to `white54` to add a glass effect
+TextStyle amountInputButtonTextStyle = const TextStyle(
   color: Colors.white54,
-  fontSize: 22.sp,
+  fontSize: 22,
   fontFamily: 'IBM Plex Sans',
   fontWeight: FontWeight.w800,
 );
 
 /// #####  TextStyle for home page action button
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `20.sp` from the `package:flutter_screenutil`, font weight to `600` and text color to `white`
-TextStyle homeActionButtonTextStyle = TextStyle(
+/// `20` from the `package:flutter_screenutil`, font weight to `600` and text color to `white`
+TextStyle homeActionButtonTextStyle = const TextStyle(
   color: Colors.white,
-  fontSize: 17.sp,
+  fontSize: 17,
   fontFamily: 'IBM Plex Sans',
   fontWeight: FontWeight.w600,
 );
 
 /// #####  TextStyle for dialog title text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `34.sp` from the `package:flutter_screenutil`, font weight to `800` and text color to `black`
-TextStyle dialogTitleTextStyle = TextStyle(
+/// `34` from the `package:flutter_screenutil`, font weight to `800` and text color to `black`
+TextStyle dialogTitleTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
-  fontSize: 34.sp,
+  fontSize: 34,
   fontWeight: FontWeight.w800,
 );
 
 /// #####  TextStyle for dialog body text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `22.sp` from the `package:flutter_screenutil`, font weight to `500` and text color to `black`
-TextStyle dialogBodyTextStyle = TextStyle(
+/// `22` from the `package:flutter_screenutil`, font weight to `500` and text color to `black`
+TextStyle dialogBodyTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
-  fontSize: 22.sp,
+  fontSize: 22,
   fontWeight: FontWeight.w500,
 );
 
 /// #####  TextStyle for dialog button text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `24.sp` from the `package:flutter_screenutil`, font weight to `600` and text color to `white`
-TextStyle dialogButtonTextStyle = TextStyle(
+/// `24` from the `package:flutter_screenutil`, font weight to `600` and text color to `white`
+TextStyle dialogButtonTextStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
-  fontSize: 24.sp,
+  fontSize: 24,
   color: Colors.white,
   fontWeight: FontWeight.w600,
 );
 
 /// #####  TextStyle for bottom navigation bar text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `14.sp` from the `package:flutter_screenutil`, font weight to `Bold`
-TextStyle navBarSelectedTabTextStyle = TextStyle(
-  fontSize: 14.sp,
+/// `14` from the `package:flutter_screenutil`, font weight to `Bold`
+TextStyle navBarSelectedTabTextStyle = const TextStyle(
+  fontSize: 14,
   fontWeight: FontWeight.bold,
   fontFamily: 'IBM Plex Sans',
 );
 
 /// #####  TextStyle for bottom navigation bar  unselected text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `14.sp` from the `package:flutter_screenutil`, font weight to `Bold`
-TextStyle navBarUnSelectedTabTextStyle = TextStyle(
-  fontSize: 14.sp,
+/// `14` from the `package:flutter_screenutil`, font weight to `Bold`
+TextStyle navBarUnSelectedTabTextStyle = const TextStyle(
+  fontSize: 14,
   fontWeight: FontWeight.bold,
   fontFamily: 'IBM Plex Sans',
 );
 
 /// #####  TextStyle for bottom navigation bar  unselected text
 /// Here we are setting the text style to font family `IBM Plex Sans` and font size to
-/// `14.sp` from the `package:flutter_screenutil`, font weight to `Bold`
+/// `14` from the `package:flutter_screenutil`, font weight to `Bold`
 
 TextStyle headingTextStyle = const TextStyle(
   fontSize: 18.0,
@@ -204,15 +203,15 @@ TextStyle textBoxStyle = const TextStyle(
   fontFamily: 'IBM Plex Sans',
 );
 
-TextStyle textBoxHintStyle = TextStyle(
-  fontSize: 16.5.sp,
+TextStyle textBoxHintStyle = const TextStyle(
+  fontSize: 16.5,
   fontWeight: FontWeight.w300,
   color: Colors.white,
   fontFamily: 'IBM Plex Sans',
 );
 
-TextStyle textBoxHintStyleLight = TextStyle(
-  fontSize: 16.sp,
+TextStyle textBoxHintStyleLight = const TextStyle(
+  fontSize: 16,
   fontWeight: FontWeight.w500,
   color: Colors.white60,
   fontFamily: 'IBM Plex Sans',

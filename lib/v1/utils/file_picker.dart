@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
@@ -23,10 +22,10 @@ Future<String?> uploadImageToImageKit(context, List<int> imageBytes, String file
               borderRadius: BorderRadius.circular(10),
             ),
             child: fluent.Padding(
-              padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
+              padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Loading...')],
+                children: [const fluent.ProgressBar(), 20.ph, AppTypography.bodySmall(text: 'Loading...')],
               ),
             ),
           ),

@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "991621591966",
+    "project_id": "mywater-abc",
+    "storage_bucket": "mywater-abc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991621591966:android:94b0af52749322616a5c8f",
+        "android_client_info": {
+          "package_name": "com.example.mywater_dashboard_revamp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991621591966-vbngc8l4lq9h2j71aa64rr5hu97d1eov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA6taOYaQiPKr_8CM_Nf8d6pxhECGJYkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991621591966-vbngc8l4lq9h2j71aa64rr5hu97d1eov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991621591966-hjfnm6ls9qsegh30l91cvsuhg073nhh5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mywaterWebApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991621591966:android:846d90ff3d4af52f6a5c8f",
+        "android_client_info": {
+          "package_name": "com.mywater.mywater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991621591966-vbngc8l4lq9h2j71aa64rr5hu97d1eov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA6taOYaQiPKr_8CM_Nf8d6pxhECGJYkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991621591966-vbngc8l4lq9h2j71aa64rr5hu97d1eov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991621591966-hjfnm6ls9qsegh30l91cvsuhg073nhh5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mywaterWebApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

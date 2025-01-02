@@ -1,7 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenAppOverlay {
   ScreenAppOverlay._();
@@ -14,36 +12,19 @@ class ScreenAppOverlay {
         builder: (context) {
           return Dialog(
             backgroundColor: Colors.transparent,
-            surfaceTintColor: Colors.transparent,
-            insetPadding: EdgeInsets.symmetric(horizontal: 150.w, vertical: 20.h),
+            // surfaceTintColor: Colors.transparent,
+            insetPadding: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
             child: fluent.Acrylic(
               shadowColor: Colors.black12,
-              elevation: 10,
-              tint: Colors.white10,
-              blurAmount: 30,
+              elevation: 100,
+              tint: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6.r),
+                borderRadius: BorderRadius.circular(6),
                 side: const BorderSide(
                   color: Colors.white,
                 ),
               ),
-              child: fluent.Stack(
-                children: [
-                  body,
-                  Positioned(
-                    top: 10.0,
-                    right: 10.0,
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        CupertinoIcons.multiply,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              child: body,
             ),
           );
         });

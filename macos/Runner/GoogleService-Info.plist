@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>991621591966-l8rkqavjcv2uthoollu1lota9tjfv3b5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.991621591966-l8rkqavjcv2uthoollu1lota9tjfv3b5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCuvzF7taskOn7hNmUUd-Sw1qD3fm0ItoA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>991621591966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mywaterDashboardRevamp</string>
+	<key>PROJECT_ID</key>
+	<string>mywater-abc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mywater-abc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:991621591966:ios:ad76c6789d629a0b6a5c8f</string>
+</dict>
+</plist>

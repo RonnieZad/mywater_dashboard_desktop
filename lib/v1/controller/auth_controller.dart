@@ -2,7 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mywater_dashboard_revamp/v1/models/authentication_model.dart';
@@ -46,10 +45,10 @@ class AuthController extends GetxController {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: fluent.Padding(
-                padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Creating account...')],
+                  children: [const fluent.ProgressBar(), 20.ph, AppTypography.labelMedium(text: 'Creating account...')],
                 ),
               ),
             ),
@@ -86,10 +85,10 @@ class AuthController extends GetxController {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: fluent.Padding(
-                padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [const fluent.ProgressBar(), 20.ph, paragraph(text: 'Logging in...')],
+                  children: [const fluent.ProgressBar(), 20.ph, AppTypography.bodyMedium(text: 'Logging in...')],
                 ),
               ),
             ),

@@ -1,58 +1,112 @@
-class CampaignModel {
-  final String promotionText;
-  final String promotionDescription;
-  final String pictureUrl;
-  final String? promotionPublicUrl;
-  final String? advertId;
-  final String? creationDate;
-  final String? expiryDate;
-  final String? status;
-  final String? advertiserId;
-  final int? scanCount;
+import 'package:file_picker/file_picker.dart';
 
-  CampaignModel({
-    required this.promotionText,
-    required this.promotionDescription,
-    required this.pictureUrl,
-     this.promotionPublicUrl,
-    this.advertId,
-    this.creationDate,
-    this.expiryDate,
-    this.scanCount,
-    this.status,
-    this.advertiserId,
+class Campaign {
+  final List<Ad> ad;
+  final List<String> clients;
+  final int endDate;
+  final String name;
+  final Reward reward;
+  final int startDate;
+  final String status;
+  final String campaignLogo;
+
+  Campaign({
+    required this.ad,
+    required this.clients,
+    required this.endDate,
+    required this.name,
+    required this.reward,
+    required this.startDate,
+    required this.status,
+    required this.campaignLogo,
   });
 
-  factory CampaignModel.fromJson(Map<String, dynamic> json) {
-    return CampaignModel(
-      advertId: json['advert_id'],
-      promotionText: json['promotion_text'],
-      promotionDescription: json['promotion_description'],
-      promotionPublicUrl: json['advert_public_url'],
-      pictureUrl: json['picture_url'],
-      creationDate: json['creation_date'],
-      expiryDate: json['expiry_date'] ?? '',
-      scanCount: json['scan_count'] ?? 0,
-      status: 'Active',
-      advertiserId: json['advertiser_id'],
+  factory Campaign.fromMap(Map<String, dynamic> map) {
+    return Campaign(
+      ad: List<Ad>.from((map['ad'] ?? []).map((x) => Ad.fromMap(x))),
+      clients: List<String>.from(map['clients'] ?? []),
+      endDate: map['endDate'] ?? 0,
+      name: map['name'] ?? '',
+      reward: Reward.fromMap(map['reward'] ?? {}),
+      startDate: map['startDate'] ?? 0,
+      status: map['status'] ?? '',
+      campaignLogo: map['campaignLogo'] ?? '',
     );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> map = {
-      'advert_id': advertId,
-      'promotion_text': promotionText,
-      'promotion_description': promotionDescription,
-      'advert_public_url': promotionPublicUrl,
-      'picture_url': pictureUrl,
-      'creation_date': creationDate,
-      'expiry_date': expiryDate,
-      'scan_count': scanCount,
-      'status': status,
-      'advertiser_id': advertiserId,
-    };
+class Ad {
+  final String adArtworkUrl;
+  final String adName;
+  final String adPhone;
+  final String adWebsite;
+  final String companyEmail;
+  final String companyLogo;
+  final String companyName;
+  final String companyPhone;
+  final String companyWebsite;
+  final String description;
 
-    //remove null values
-    return map..removeWhere((key, value) => value == null);
+  Ad({
+    required this.adArtworkUrl,
+    required this.adName,
+    required this.adPhone,
+    required this.adWebsite,
+    required this.companyEmail,
+    required this.companyLogo,
+    required this.companyName,
+    required this.companyPhone,
+    required this.companyWebsite,
+    required this.description,
+  });
+
+  factory Ad.fromMap(Map<String, dynamic> map) {
+    return Ad(
+      adArtworkUrl: map['adArtworkUrl'] ?? '',
+      adName: map['adName'] ?? '',
+      adPhone: map['adPhone'] ?? '',
+      adWebsite: map['adWebsite'] ?? '',
+      companyEmail: map['companyEmail'] ?? '',
+      companyLogo: map['companyLogo'] ?? '',
+      companyName: map['companyName'] ?? '',
+      companyPhone: map['companyPhone'] ?? '',
+      companyWebsite: map['companyWebsite'] ?? '',
+      description: map['description'] ?? '',
+    );
   }
+}
+
+class Reward {
+  final int amount;
+  final String type;
+
+  Reward({
+    required this.amount,
+    required this.type,
+  });
+
+  factory Reward.fromMap(Map<String, dynamic> map) {
+    return Reward(
+      amount: map['amount'] ?? 0,
+      type: map['type'] ?? '',
+    );
+  }
+}
+
+class CampaignFormData {
+  final String title;
+  final String description;
+  final String publicUrl;
+  final DateTime startDate;
+  final DateTime endDate;
+  final FilePickerResult? artworkFile;
+
+  const CampaignFormData({
+    required this.title,
+    required this.description,
+    required this.publicUrl,
+    required this.startDate,
+    required this.endDate,
+    this.artworkFile,
+  });
 }

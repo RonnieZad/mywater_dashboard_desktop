@@ -34,8 +34,8 @@ class WebSocketService {
 
   static void processScanAdChannel(context) {
     CampaignController campaignController = Get.find();
-    campaignController.getCampaignMetrics();
-    campaignController.fetchCampaigns();
+    // campaignController.getCampaignMetrics();
+    
     ScreenOverlay.showToast(context, title: 'New add scan', message: 'A user recently scanned this promo add');
   }
 }

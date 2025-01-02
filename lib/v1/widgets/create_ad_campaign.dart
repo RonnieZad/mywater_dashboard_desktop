@@ -1,18 +1,14 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:mywater_dashboard_revamp/v1/constants/colors.dart';
 import 'package:mywater_dashboard_revamp/v1/controller/campaign_controller.dart';
-import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:mywater_dashboard_revamp/v1/models/campaign_model.dart';
-import 'package:mywater_dashboard_revamp/v1/utils/file_picker.dart';
-import 'package:mywater_dashboard_revamp/v1/utils/screen_overlay.dart';
+import 'package:mywater_dashboard_revamp/v1/services/campaign_service.dart';
 import 'package:mywater_dashboard_revamp/v1/utils/utils.dart';
 
 class CreateCampaign extends StatefulWidget {
@@ -28,33 +24,32 @@ class _CreateCampaignState extends State<CreateCampaign> {
   Widget build(BuildContext context) {
     return Obx(() {
       return SizedBox(
-        width: 500.w,
+        width: 700,
         child: ListView(
-          padding: EdgeInsets.all(18.w),
+          padding: const EdgeInsets.all(18),
           shrinkWrap: true,
           children: [
-            heading(text: 'Create New Ad Campaign', color: baseColor),
+            AppTypography.titleLarge(text: 'Create New Ad Campaign', color: baseColor),
             10.ph,
-            paragraph(text: 'Submit campaign artwork to MyWater to create an ad', color: Colors.black54),
+            AppTypography.titleMedium(text: 'Submit campaign artwork to MyWater to create an ad', color: Colors.black54),
             30.ph,
             if (campaignController.artworkFile.value!.files.isNotEmpty) ...[
               Row(
                 children: [
                   Expanded(
-                    child: kIsWeb ? Image.memory(campaignController.artworkFile.value!.files.first.bytes!, height: 280.h, fit: BoxFit.cover) : Image.file(File(campaignController.artworkFile.value!.files.first.path!), height: 280.h, fit: BoxFit.cover),
+                    child: kIsWeb ? Image.memory(campaignController.artworkFile.value!.files.first.bytes!, height: 280, fit: BoxFit.cover) : Image.file(File(campaignController.artworkFile.value!.files.first.path!), height: 280, fit: BoxFit.cover),
                   ),
                 ],
               ),
               20.ph,
             ],
             SizedBox(
-              height: 45.h,
+              height: 45,
               child: fluent.Button(
                 child: fluent.Center(
-                    child: label(
+                    child: AppTypography.labelLarge(
                   text: 'Upload Artwork',
                   color: Colors.black54,
-                  fontSize: 11.sp,
                 )),
                 onPressed: () async {
                   campaignController.artworkFile.value = await FilePicker.platform.pickFiles();
@@ -65,80 +60,80 @@ class _CreateCampaignState extends State<CreateCampaign> {
             20.ph,
             fluent.InfoLabel(
               label: 'Promotion Title',
-              labelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+              labelStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16,fontWeight:FontWeight.w500),
               child: fluent.TextBox(
-                prefix: fluent.Padding(
-                  padding: EdgeInsets.only(left: 20.w),
+                prefix: const fluent.Padding(
+                  padding: EdgeInsets.only(left: 20),
                   child: Icon(
                     fluent.FluentIcons.text_field,
                     color: Colors.black54,
-                    size: 13.w,
+                    size: 13,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 controller: campaignController.campaignTitleController,
                 placeholder: 'eg App download Promotion',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
+                style: const TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.black54),
                 expands: false,
               ),
             ),
             20.ph,
             fluent.InfoLabel(
               label: 'Promotion Description',
-              labelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+              labelStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight:FontWeight.w500),
               child: fluent.TextBox(
-                prefix: fluent.Padding(
-                  padding: EdgeInsets.only(left: 20.w),
+                prefix: const fluent.Padding(
+                  padding: EdgeInsets.only(left: 20),
                   child: Icon(
                     fluent.FluentIcons.text_field,
                     color: Colors.black54,
-                    size: 13.w,
+                    size: 13,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 controller: campaignController.campaignDescriptionController,
                 placeholder: 'eg Get 10% off on your first purchase',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
+                style: const TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.black54),
                 expands: false,
               ),
             ),
             20.ph,
             fluent.InfoLabel(
               label: 'Promotion public url',
-              labelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+              labelStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16,fontWeight:FontWeight.w500),
               child: fluent.TextBox(
-                prefix: fluent.Padding(
-                  padding: EdgeInsets.only(left: 20.w),
+                prefix: const fluent.Padding(
+                  padding: EdgeInsets.only(left: 20),
                   child: Icon(
                     fluent.FluentIcons.text_field,
                     color: Colors.black54,
-                    size: 13.w,
+                    size: 13,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 controller: campaignController.campaignPublicUrlController,
                 placeholder: 'eg www.publicUrlGoesHere.com',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
+                style: const TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.black54),
                 expands: false,
               ),
             ),
             20.ph,
             fluent.InfoLabel(
               label: 'Survey Question',
-              labelStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+              labelStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16,fontWeight:FontWeight.w500),
               child: fluent.TextBox(
-                prefix: fluent.Padding(
-                  padding: EdgeInsets.only(left: 20.w),
+                prefix: const fluent.Padding(
+                  padding: EdgeInsets.only(left: 20),
                   child: Icon(
                     fluent.FluentIcons.text_field,
                     color: Colors.black54,
-                    size: 13.w,
+                    size: 13,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 controller: campaignController.campaignSurveyQuestionOneController,
                 placeholder: 'optional',
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 11.sp, color: Colors.black54),
+                style: const TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Colors.black54),
                 expands: false,
               ),
             ),
@@ -147,7 +142,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
               children: [
                 fluent.DatePicker(
                   header: 'Campaign Start Date',
-                  headerStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+                  headerStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16,fontWeight:FontWeight.w500),
                   startDate: DateTime.now(),
                   selected: campaignController.campaignStartDate,
                   onChanged: (time) => setState(() => campaignController.campaignStartDate = time),
@@ -155,7 +150,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                 const Spacer(),
                 fluent.DatePicker(
                   header: 'Campaign End Date',
-                  headerStyle: TextStyle(fontFamily: 'Poppins', fontSize: 13.sp),
+                  headerStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 16,fontWeight:FontWeight.w500),
                   selected: campaignController.campaignEndDate,
                   onChanged: (time) => setState(() => campaignController.campaignEndDate = time),
                 ),
@@ -166,51 +161,24 @@ class _CreateCampaignState extends State<CreateCampaign> {
               children: [
                 Expanded(
                   child: SizedBox(
-                    height: 45.h,
+                    height: 45,
                     child: fluent.FilledButton(
                       child: fluent.Center(
-                          child: label(
+                          child: AppTypography.labelLarge(
                         text: 'Submit Campaign',
                         color: Colors.white,
-                        fontSize: 10.sp,
                       )),
                       onPressed: () async {
-                        print('we are');
-                        String? uploadedImageUrl;
+                        final formData = CampaignFormData(
+                          title: campaignController.campaignTitleController.text,
+                          description: campaignController.campaignDescriptionController.text,
+                          publicUrl: campaignController.campaignPublicUrlController.text,
+                          startDate: campaignController.campaignStartDate!,
+                          endDate: campaignController.campaignEndDate!,
+                          artworkFile: campaignController.artworkFile.value,
+                        );
 
-                        if (campaignController.artworkFile.value!.files.isNotEmpty) {
-                          for (PlatformFile file in campaignController.artworkFile.value!.files) {
-                            if (!kIsWeb) {
-                              File pickedFile = File(file.path!);
-
-                              final List<int> imageBytes = await pickedFile.readAsBytes();
-                              uploadedImageUrl = await uploadImageToImageKit(context, imageBytes, 'myWaterCampaignArtwork');
-                            } else {
-                              Uint8List? pickedFile = file.bytes;
-
-                              uploadedImageUrl = await uploadImageToImageKit(context, pickedFile!.toList(), 'myWaterCampaignArtwork');
-                            }
-                          }
-                        }
-
-                        if (campaignController.campaignTitleController.text.isEmpty) {
-                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in title', isWarning: true);
-                        } else if (campaignController.campaignDescriptionController.text.isEmpty) {
-                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in description', isWarning: true);
-                        } else if (campaignController.campaignPublicUrlController.text.isEmpty) {
-                          ScreenOverlay.showToast(context, title: 'Missing Field', message: 'Fill in public url', isWarning: true);
-                        } else {
-                          CampaignModel campaignModel = CampaignModel(
-                            advertiserId: GetStorage().read('partnerId'),
-                            promotionText: campaignController.campaignTitleController.text,
-                            promotionDescription: campaignController.campaignDescriptionController.text,
-                            promotionPublicUrl: campaignController.campaignPublicUrlController.text,
-                            pictureUrl: uploadedImageUrl!,
-                          );
-                          campaignController.createCampaign(context, campaignModel: campaignModel).then((callback) {
-                            Navigator.pop(context);
-                          });
-                        }
+                        await CampaignService().createCampaign(context, formData);
                       },
                     ),
                   ),
